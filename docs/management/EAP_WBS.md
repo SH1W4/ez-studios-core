@@ -1,7 +1,7 @@
 # EAP - ESTRUTURA ANALÍTICA DO PROJETO (WBS) 📑
 
 **PROJETO**: EZ Studios - Agnostic AI SaaS  
-**VERSÃO**: 2.2.0 (Cloud-First)  
+**VERSÃO**: 2.3.0 (Polyglot Core)  
 **DATA**: 14 de Janeiro de 2026
 
 ---
@@ -21,7 +21,7 @@
 ### 1.2 EZ CLOUD HUB (SaaS LAYER)
 - **1.2.1 Visual Intent IDE (Web)**
   - 1.2.1.1 Interface GenUI (React/Next.js)
-  - 1.2.1.2 Visualizador 3D (Three.js Bridge)
+  - 1.2.1.2 Natural Language Interface ("AI Mode")
   - 1.2.1.3 Estética Drag-and-Drop (Aesthetic Selector)
 - **1.2.2 Gestão de Ecossistema**
   - 1.2.2.1 Dashboard de Aluno e Mentor
@@ -32,20 +32,22 @@
   - 1.3.1.1 Heurística de Colapso Preditivo (ML-WFC)
   - 1.3.1.2 AST (Aesthetic Style Transfer) de Geometria
 - **1.3.2 Processamento de Linguagem Natural**
-  - 1.3.2.1 Mapeamento Narração-para-Mundo (LLM Bridge)
+  - 1.3.2.1 Prompt Parser (Text-to-Intent)
+  - 1.3.2.2 Keyword Extraction Engine
 
-### 1.4 AGNOSTIC CORE v2.2.0 (ENGINE LAYER)
+### 1.4 AGNOSTIC CORE v2.3.0 (ENGINE LAYER)
 - **1.4.1 Núcleo Matemático**
   - 1.4.1.1 Solver WFC/AC-3 (Zero Entropia)
   - 1.4.1.2 Particionador BSP 3D Multicamada
 - **1.4.2 Agilidade de Vanguarda**
   - 1.4.2.1 Compilador de Intent para Código IR
-  - 1.4.2.2 Sistema de Logs de Alta Performance (GlobalLogger)
+  - 1.4.2.2 Polyglot Asset Registry (Lua/C#/GDScript)
+  - 1.4.2.3 Sistema de Logs de Alta Performance (GlobalLogger)
 
 ### 1.5 UNIVERSAL CONNECTORS (INTEGRATION LAYER)
 - **1.5.1 Conectores Nativos**
-  - 1.5.1.1 Roblox Bridge (Otimização Luau Opcode)
-  - 1.5.1.2 Unity & Godot Hub (.json/C#)
+  - 1.5.1.1 Roblox Adapter (Lua Behavior Injection)
+  - 1.5.1.2 Unity & Godot Hub (via Registry)
 - **1.5.2 Cloud Sync**
   - 1.5.2.1 Protocolo de Exportação "One-Click"
 

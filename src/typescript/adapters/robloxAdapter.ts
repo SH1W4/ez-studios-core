@@ -5,6 +5,7 @@
 
 import { IEngineAdapter, RobloxAdapterOptions } from "./index";
 import { ProceduralEntity, MapaGerado, ActorInstance, ItemInstance, MarketplaceMetadata } from "../core/models/types";
+import { resolveAssetBehavior } from "../data/assetRegistry";
 
 export class RobloxAdapter implements IEngineAdapter {
     readonly engineName = "Roblox";
@@ -98,11 +99,14 @@ function MapBuilder.Build(workspace)
     }
 
     private generateItemCode(item: ItemInstance, _opt: Required<RobloxAdapterOptions>): string {
-        const behaviorScript = this.getItemBehaviorTemplate(item);
         const estetica = item.metadados.estetica || "Quantum";
 
-        return `-- EZ STUDIOS - Item Factory (v2.2.0 - Art Finalized)
--- ID: ${item.id} | Raridade: ${item.raridade} | Estética: ${estetica} | Hash: ${item.metadados.hashGeracao}
+        // Lookup Behavior from Registry
+        const behaviorScript = resolveAssetBehavior("Item", item.metadados.tags || [], "roblox");
+
+        return `-- EZ STUDIOS - Item Factory (v2.2.0 - Registry Powered)
+-- ID: ${item.id} | Raridade: ${item.raridade} | Estética: ${estetica}
+-- Powered by Polyglot Asset Registry
 
 local ItemFactory = {}
 
@@ -125,14 +129,14 @@ ${this.applyArtisticFinalization("handle", item.metadados)}
     
     ${Object.entries(item.stats).map(([k, v]) => `local val_${k} = Instance.new("NumberValue", stats); val_${k}.Name = "${k}"; val_${k}.Value = ${v}`).join("\n    ")}
     
-    -- Injetar Script de Comportamento Procedural
+    -- Injetar Script de Comportamento Procedural (Registry)
     local script = Instance.new("Script", tool)
     script.Name = "BehaviorScript"
     script.Source = [[
 ${behaviorScript}
     ]]
     
-    print("[EZ Studios] Item ${item.id} finalizado com estética ${estetica}.")
+    print("[EZ Studios] Item ${item.id} finalizado via Registry.")
     return tool
 end
 
@@ -140,59 +144,15 @@ return ItemFactory.Create()
 `;
     }
 
-    private getItemBehaviorTemplate(item: ItemInstance): string {
-        const tipo = item.tipo.toLowerCase();
-        if (tipo.includes("espada") || tipo.includes("sword") || tipo.includes("weapon")) {
-            return `local tool = script.Parent
-local stats = tool:WaitForChild("Attributes")
-local damage = stats:WaitForChild("dano").Value
-
-tool.Activated:Connect(function()
-    print("[EZ] Usando arma: " .. tool.Name)
-    local character = tool.Parent
-    local humanoid = character:FindFirstChildOfClass("Humanoid")
-    
-    -- Lógica de Dano Proximidade (Exemplo)
-    local handle = tool:FindFirstChild("Handle")
-    handle.Touched:Connect(function(hit)
-        local enemy = hit.Parent:FindFirstChild("Humanoid")
-        if enemy and enemy ~= humanoid then
-            enemy:TakeDamage(damage)
-            print("[EZ] Dano causado: " .. damage)
-        end
-    end)
-    task.wait(0.5)
-end)`;
-        }
-
-        if (tipo.includes("pocao") || tipo.includes("potion") || tipo.includes("cura")) {
-            return `local tool = script.Parent
-local stats = tool:WaitForChild("Attributes")
-
-tool.Activated:Connect(function()
-    local character = tool.Parent
-    local humanoid = character:FindFirstChild("Humanoid")
-    if humanoid then
-        local healAmount = stats:FindFirstChild("cura") and stats.cura.Value or 20
-        humanoid.Health = math.min(humanoid.MaxHealth, humanoid.Health + healAmount)
-        print("[EZ] Jogador curado em: " .. healAmount)
-        tool:Destroy()
-    end
-end)`;
-        }
-
-        return `-- Comportamento Padrão
-script.Parent.Equipped:Connect(function()
-    print("[EZ] Item equipado: " .. script.Parent.Name)
-end)`;
-    }
-
     private generateActorCode(actor: ActorInstance, _opt: Required<RobloxAdapterOptions>): string {
-        const aiScript = this.getActorAITemplate(actor);
         const estetica = actor.metadados.estetica || "Quantum";
 
-        return `-- EZ STUDIOS - Actor Engine (v2.2.0 - Art Finalized)
--- ID: ${actor.id} | Nome: ${actor.nome} | Hash: ${actor.metadados.hashGeracao}
+        // Lookup Behavior from Registry
+        const aiScript = resolveAssetBehavior("Actor", actor.metadados.tags || [], "roblox");
+
+        return `-- EZ STUDIOS - Actor Engine (v2.2.0 - Registry Powered)
+-- ID: ${actor.id} | Nome: ${actor.nome}
+-- Powered by Polyglot Asset Registry
 
 local ActorEngine = {}
 
@@ -219,14 +179,14 @@ ${this.applyArtisticFinalization("hrp", actor.metadados)}
     behavior.Name = "Behavior"
     behavior.Value = "${actor.IA.comportamento}"
     
-    -- Injetar Cérebro (Script de IA)
+    -- Injetar Cérebro (Script de IA do Registry)
     local brain = Instance.new("Script", npc)
     brain.Name = "AICore"
     brain.Source = [[
 ${aiScript}
     ]]
     
-    print("[EZ Studios] Ator ${actor.nome} spawnado com estética ${estetica}.")
+    print("[EZ Studios] Ator ${actor.nome} spawnado via Registry.")
     return npc
 end
 
@@ -234,50 +194,13 @@ return ActorEngine
 `;
     }
 
-    private getActorAITemplate(actor: ActorInstance): string {
-        const behavior = actor.IA.comportamento.toLowerCase();
-
-        if (behavior.includes("follow") || behavior.includes("persegue")) {
-            return `local npc = script.Parent
-local humanoid = npc:WaitForChild("Humanoid")
-local root = npc:WaitForChild("HumanoidRootPart")
-
-task.spawn(function()
-    while task.wait(1) do
-        local players = game.Players:GetPlayers()
-        if #players > 0 then
-            local target = players[1].Character
-            if target and target:FindFirstChild("HumanoidRootPart") then
-                humanoid:MoveTo(target.HumanoidRootPart.Position)
-            end
-        end
-    end
-end)`;
-        }
-
-        if (behavior.includes("dialog") || behavior.includes("npc")) {
-            return `local npc = script.Parent
-local root = npc:WaitForChild("HumanoidRootPart")
-
-local prompt = Instance.new("ProximityPrompt", root)
-prompt.ActionText = "Conversar"
-prompt.ObjectText = npc.Name
-
-prompt.Triggered:Connect(function(player)
-    print("[EZ Agent] Olá " .. player.Name .. "! Eu sou um NPC gerado proceduralmente.")
-end)`;
-        }
-
-        return `-- IA Estática
-print("[EZ] NPC " .. script.Parent.Name .. " inicializado em modo passivo.")`;
-    }
-
     getBuildStats(entidade: ProceduralEntity) {
         return {
             engine: this.engineName,
             id: entidade.id,
             hash: entidade.metadados.hashGeracao,
-            estetica: entidade.metadados.estetica || "Padrão"
+            estetica: entidade.metadados.estetica || "Padrão",
+            registryVersion: "1.0.0"
         };
     }
 }

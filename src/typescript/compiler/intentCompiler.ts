@@ -186,6 +186,60 @@ export function compilarIntencao(
   }
 }
 
+/**
+ * Analisa um prompt de linguagem natural e converte em uma Intenção estruturada
+ */
+export function parsePrompt(prompt: string): Intencao {
+  const p = prompt.toLowerCase();
+
+  // 1. Detectar Categoria
+  let categoria: "Mapa" | "Item" | "Actor" = "Mapa"; // Default
+  if (p.includes("item") || p.includes("espada") || p.includes("pocao") || p.includes("arma")) categoria = "Item";
+  else if (p.includes("actor") || p.includes("npc") || p.includes("monstro") || p.includes("boss")) categoria = "Actor";
+
+  // 2. Extrair Tags / Keywords
+  const tags: string[] = [];
+  const keywords = ["fogo", "gelo", "floresta", "dungeon", "cidade", "cyberpunk", "medieval", "futurista", "natureza", "sombrio", "radiante"];
+
+  keywords.forEach(k => {
+    if (p.includes(k)) tags.push(k);
+  });
+
+  // 3. Detectar Parâmetros Específicos
+  const parametros: any = {};
+
+  // Estética
+  if (p.includes("cyber") || p.includes("quantum")) parametros.estetica = "Quantum";
+  else if (p.includes("medieval") || p.includes("rpg")) parametros.estetica = "Realistic";
+  else if (p.includes("lowpoly") || p.includes("simples")) parametros.estetica = "LowPoly";
+  else parametros.estetica = "Quantum"; // Default system aesthetic
+
+  // Dimensões (Simples heurística)
+  if (p.includes("grande") || p.includes("enorme")) {
+    parametros.largura = 64; parametros.altura = 64;
+  } else if (p.includes("pequeno") || p.includes("compacto")) {
+    parametros.largura = 16; parametros.altura = 16;
+  } else {
+    parametros.largura = 32; parametros.altura = 32;
+  }
+
+  // Item Specifics
+  if (categoria === "Item") {
+    if (p.includes("espada")) parametros.tipo = "espada";
+    else if (p.includes("pocao")) parametros.tipo = "pocao";
+  }
+
+  return {
+    id: `intent_${Date.now()}`,
+    categoria,
+    descricaoNatural: prompt,
+    parametros: {
+      ...parametros,
+      tags
+    }
+  };
+}
+
 function criarRNG(seed: string): () => number {
   let state = 0;
   for (let i = 0; i < seed.length; i++) {

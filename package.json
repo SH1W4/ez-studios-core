@@ -8,8 +8,9 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "build": "tsc",
-    "dev": "tsx watch src/typescript/tests/bsp3d.test.ts"
+    "build": "tsc && vite build",
+    "dev": "vite",
+    "preview": "vite preview"
   },
   "keywords": [
     "procedural",
@@ -28,11 +29,18 @@
     "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^5.1.2",
+    "autoprefixer": "^10.4.23",
     "eslint": "^8.0.0",
+    "jsdom": "^27.4.0",
+    "postcss": "^8.5.6",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "tailwindcss": "^3.4.19",
+    "tailwindcss-animate": "^1.0.7",
     "tsx": "^4.0.0",
     "typescript": "^5.0.0",
+    "vite": "^7.3.1",
     "vitest": "^1.0.0"
   },
   "dependencies": {

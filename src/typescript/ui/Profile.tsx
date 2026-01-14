@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Settings, LogOut, Copy, Share2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { useLocation } from "wouter";
 
 /**
