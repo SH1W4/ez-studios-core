@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect, beforeEach } from "vitest";
-import { generateBSP } from "../core/bsp/bsp";
+import { generateBspTree, flattenToSectors, validarSetores } from "../core/bsp/bsp";
 import {
   deserializeMapa,
   serializeMapa,
@@ -42,23 +42,36 @@ const TILES_TESTE: Tile[] = [
   },
 ];
 
-describe("BSP 3D - Binary Space Partitioning", () => {
-  it("deve gerar árvore BSP válida em 3D", () => {
-    const config: ConfigBSP = {
-      largura: 100,
-      altura: 100,
-      profundidade: 50,
-      profundidadeMaxima: 4,
-      tamanhoMinimoSala: 10,
-    };
+describe("BSP 3D Core", () => {
+  const config: ConfigBSP = {
+    largura: 100,
+    altura: 100,
+    profundidade: 50,
+    tamanhoMinimoSala: 20,
+    profundidadeMaxima: 3,
+  };
+  const mockRng = () => 0.5;
 
-    const rng = () => Math.random();
-    const tree = generateBSP(config, rng);
-
+  it("deve gerar uma árvore BSP válida", () => {
+    const tree = generateBspTree(config, mockRng);
     expect(tree).toBeDefined();
+    expect(tree.id).toContain("bsp_");
     expect(tree.bounds.largura).toBe(100);
-    expect(tree.bounds.altura).toBe(100);
     expect(tree.bounds.profundidade).toBe(50);
+  });
+
+  it("deve achatar a árvore em setores", () => {
+    const tree = generateBspTree(config, mockRng);
+    const setores = flattenToSectors(tree);
+    expect(setores.length).toBeGreaterThan(0);
+    expect(setores[0].id).toContain("setor_");
+  });
+
+  it("deve respeitar os limites mínimos de tamanho", () => {
+    const tree = generateBspTree(config, mockRng);
+    const setores = flattenToSectors(tree);
+    const valido = validarSetores(setores, config.tamanhoMinimoSala);
+    expect(valido).toBe(true);
   });
 });
 
