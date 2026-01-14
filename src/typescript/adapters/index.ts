@@ -1,9 +1,9 @@
 /**
  * Interface Base para Adaptadores de Engine
- * Define o contrato que qualquer engine (Roblox, Unity, etc) deve seguir
+ * Define o contrato para qualquer engine (Roblox, Unity, etc) gerar qualquer entidade
  */
 
-import { MapaGerado } from "../core/models/types";
+import { ProceduralEntity } from "../core/models/types";
 
 export interface IEngineAdapter {
   /** Nome identificador da engine (ex: "Roblox", "Unity") */
@@ -13,16 +13,16 @@ export interface IEngineAdapter {
   readonly fileExtension: string;
 
   /**
-   * Converte um mapa gerado em código executável na engine alvo
-   * @param mapa O objeto de mapa gerado pelo core
+   * Converte uma entidade procedural em código executável na engine alvo
+   * @param entidade Mapa, Ator ou Item gerado pelo core
    * @param options Opções específicas de customização
    */
-  generateCode(mapa: MapaGerado, options?: any): string;
+  generateCode(entidade: ProceduralEntity, options?: any): string;
 
   /**
    * Retorna metadados ou estatísticas da construção
    */
-  getBuildStats(mapa: MapaGerado): any;
+  getBuildStats(entidade: ProceduralEntity): any;
 }
 
 export interface RobloxAdapterOptions {

@@ -4,6 +4,11 @@
  */
 
 /**
+ * Entidade Procedural: Unificação de tudo que o motor pode gerar
+ */
+export type ProceduralEntity = MapaGerado | ActorInstance | ItemInstance;
+
+/**
  * Representa um tipo de tile com suas propriedades e regras de adjacência
  */
 export interface Tile {
@@ -39,6 +44,71 @@ export interface TileInstance {
 }
 
 /**
+ * Ator: Instância de personagem ou NPC gerado proceduralmente
+ */
+export interface ActorInstance {
+  id: string;
+  blueprintId: string;
+  nome?: string;
+  stats: {
+    vida: number;
+    dano: number;
+    velocidade: number;
+    inteligencia: number;
+  };
+  visual: {
+    modeloBase: string;
+    escala: number;
+    cores: Record<string, string>;
+    acessorios: string[];
+  };
+  IA: {
+    comportamento: "agressivo" | "passivo" | "neutro" | string;
+    percepcao: number;
+  };
+  metadados: MarketplaceMetadata;
+}
+
+/**
+ * Item: Instância de equipamento, loot ou consumível gerado
+ */
+export interface ItemInstance {
+  id: string;
+  blueprintId: string;
+  tipo: "arma" | "armadura" | "consumivel" | "cosmetico" | string;
+  raridade: "comum" | "raro" | "epico" | "lendario" | "mitico";
+  stats: Record<string, number>;
+  efeitos: string[];
+  metadados: MarketplaceMetadata;
+}
+
+/**
+ * Blueprint: O "genoma" ou template para geração de entidades
+ */
+export interface Blueprint {
+  id: string;
+  categoria: "Actor" | "Item" | "Quest";
+  regras: Regra[];
+  limites: {
+    minStats: Record<string, number>;
+    maxStats: Record<string, number>;
+  };
+}
+
+/**
+ * Metadados para Marketplace e NFT
+ */
+export interface MarketplaceMetadata {
+  autorId: string;
+  seed: string;
+  criadoEm: string;
+  hashGeracao: string; // Prova de autenticidade Entropia Zero
+  colecao?: string;
+  tags: string[];
+  versaoMotor: string;
+}
+
+/**
  * Setor: divisão volumétrica do espaço (cuboide, resultado de BSP 3D)
  */
 export interface Setor {
@@ -64,7 +134,7 @@ export interface Setor {
  */
 export interface Regra {
   id: string;
-  categoria: "Mapa" | "Progressao" | "Economia" | "Social";
+  categoria: "Mapa" | "Actor" | "Item" | "Progressao" | "Economia";
   /**
    * Condições que devem ser atendidas
    */
@@ -84,7 +154,7 @@ export interface Regra {
  */
 export interface Intencao {
   id: string;
-  categoria: "Mapa" | "Progressao" | "Economia" | "Social";
+  categoria: "Mapa" | "Actor" | "Item" | "Quest" | string;
   /**
    * Descrição natural da intenção (para logging e debug)
    */
@@ -120,9 +190,7 @@ export interface MapaGerado {
   /**
    * Metadados sobre a geração
    */
-  metadados: {
-    autorId?: string;
-    criadoEm: string;
+  metadados: MarketplaceMetadata & {
     stats?: {
       numSetores: number;
       numTiles: number;
@@ -138,7 +206,7 @@ export interface MapaGerado {
 export interface PlanoDeGeracao {
   intencao: Intencao;
   regras: Regra[];
-  mapa: MapaGerado;
+  resultado: ProceduralEntity;
   /**
    * Código gerado para a engine alvo (ex: Luau para Roblox)
    */
@@ -153,13 +221,9 @@ export interface LogEntrada {
   timestamp: string;
   studentId?: string;
   intentId: string;
-  categoria: "Mapa" | "Progressao" | "Economia" | "Social";
-  engineAlvo: "Roblox" | "Unity" | "Godot" | string;
+  categoria: Intencao["categoria"];
+  engineAlvo: "Roblox" | "Unity" | "Godot" | "Marketplace" | string;
   seed: string;
-  mapStats?: {
-    numSetores: number;
-    numTiles: number;
-  };
   buildStatus: "success" | "error" | "warning";
   errorType?: string;
   errorMessage?: string;
@@ -167,7 +231,7 @@ export interface LogEntrada {
 }
 
 /**
- * Configuração para WFC
+ * Configuração para WFC 3D
  */
 export interface ConfigWFC {
   largura: number;
@@ -185,7 +249,7 @@ export interface ConfigWFC {
 }
 
 /**
- * Configuração para BSP
+ * Configuração para BSP 3D
  */
 export interface ConfigBSP {
   largura: number;
