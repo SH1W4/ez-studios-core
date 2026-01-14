@@ -1,4 +1,4 @@
-# 🌌 EZ Studios: Core Engine v2.0
+# 🌌 EZ Studios: Core Engine v2.3.0
 > **Entropia Zero Protocol** | Transforming the Next Generation of Consumers into **Quantum Architects**.
 
 ![EZ Studios Banner](./assets/concepts/agnostic_banner.png)
@@ -28,6 +28,21 @@ The new **Intent Compiler** (Brain) parses natural language into structural rule
 
 *(Previously: The Static Bridge)*
 ![Multi-Platform Bridge](./assets/diagrams/multi_platform_bridge.png)
+
+---
+
+## 🆕 What's New in v2.3.0 (Polyglot Core)
+
+### Intent Compiler (The Brain)
+Natural language processing for procedural generation. Type **"Fire Dungeon"** and the engine auto-configures WFC rules, aesthetics, and tile sets.
+
+### Polyglot Asset Registry (The Body)
+Data-driven behavior system supporting multiple engines:
+- **Roblox** (Lua)
+- **Unity** (C#)  
+- **Godot** (GDScript)
+
+Scripts and behaviors are now **assets**, not hardcoded logic. Add new items without recompiling the adapter.
 
 ---
 
@@ -90,7 +105,7 @@ pnpm tsx src/typescript/tests/bsp3d.test.ts
 ---
 ---
 
-# ⚔️ EZ Studios: Core Engine v2.0 (PT-BR)
+# ⚔️ EZ Studios: Core Engine v2.3.0 (PT-BR)
 > **Protocolo Entropia Zero** | Transformando a próxima geração de consumidores em **Arquitetos Quânticos**.
 
 ## 💎 A Visão: De Jogador a Criador

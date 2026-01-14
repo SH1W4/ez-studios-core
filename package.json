@@ -1,6 +1,6 @@
 {
   "name": "ez-studios-core",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Agnostic AI SaaS Core for Procedural Generation",
   "main": "dist/index.js",
   "scripts": {
