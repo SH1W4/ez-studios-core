@@ -1,26 +1,23 @@
-# PROPOSTA DE TESE DE DOUTORADO (PhD)
+# PROPOSTA DE TESE DE DOUTORADO (PhD) 🎓🔬
 
-**TÍTULO**: Protocolo Entropia Zero: Arquitetura Pedagógica e Técnica para Formação de Desenvolvedores de Elite em Ambientes de Geração Procedural de Conteúdo
+**TÍTULO**: Protocolo Entropia Zero: Pedagogia Neural-Procedural e Inteligência Arquitetônica na Nuvem para a Próxima Geração de Desenvolvedores
 
 **CANDIDATO**: [SEU NOME]  
-**ORIENTADOR PROPOSTO**: [A definir - Professor de Ciência da Computação ou Educação]  
-**INSTITUIÇÃO**: [Universidade - USP, UNICAMP, MIT, Stanford, etc.]  
-**PROGRAMA**: Doutorado em Ciência da Computação / Educação / Interação Humano-Computador  
-**DATA**: Janeiro de 2026  
-**DURAÇÃO ESTIMADA**: 4 anos
+**ORIENTADOR PROPOSTO**: [A definir]  
+**VERSÃO**: 2.2.0 (SaaS Era)
 
 ---
 
-## RESUMO EXECUTIVO
+## RESUMO EXECUTIVO (v2.2.0)
 
-Esta proposta de tese apresenta o **Protocolo Entropia Zero**, um framework integrado que combina:
+Esta proposta de tese apresenta o **Protocolo Entropia Zero**, um framework convergente que une:
 
-1. **Fundamentos Teóricos**: Teoria da Informação (Entropia de Shannon), Algoritmos de Geração Procedural (WFC, BSP)
-2. **Arquitetura Pedagógica**: Sistema de aprendizado gamificado em 5 níveis para crianças de 8-16 anos
-3. **Inovação Técnica**: Compilador de Intenção Visual que transforma design em código otimizado
-4. **Validação Empírica**: Estudos com N=100+ crianças medindo eficácia educacional
+1. **Inteligência Artificial Generativa**: Redes Neurais Procedurais (ML Brain) que predizem intenção arquitetônica.
+2. **Matemática Rigorosa**: Teoria da Informação e Satisfação de Restrições (AC-3/WFC).
+3. **Arquitetura Cloud-First**: Um Hub SaaS que protege a IP ("Black Box") e coleta dados massivos de aprendizado.
+4. **Pedagogia Cognitiva**: Estudo da transição entre Intenção Semântica e Representação Matemática em menores de idade.
 
-**Contribuição Original**: Primeira arquitetura que unifica geração procedural, educação de programação e proteção de menores em um sistema coerente baseado em princípios de minimização de entropia. Introduz o conceito de **Motor Procedural Agnóstico** via *Engine Adapters*, permitindo a transposição de conceitos matemáticos entre plataformas (Roblox, Unity, Godot) sem perda de fidelidade pedagógica.
+**Contribuição Original**: A tese introduz a **Heurística de Colapso Preditivo**, demonstrando como a IA pode atuar como um "andaime cognitivo" para o ensino de algoritmos de alta complexidade, permitindo que crianças operem em níveis de abstração profissional via **SaaS Intelligence**.
 
 **Impacto Esperado**: 
 - Redução de 40-60% no tempo de aprendizado de algoritmos complexos

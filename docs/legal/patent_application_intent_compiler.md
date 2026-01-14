@@ -268,71 +268,21 @@ Entropia Média: 0.42
 
 a) Um **editor visual de regras** configurado para receber entrada de usuário através de interface gráfica drag-and-drop, permitindo definição de elementos visuais (tiles) e regras de adjacência entre eles;
 
-b) Um **motor de validação algébrica** configurado para:
-   - Construir matriz de adjacência a partir das regras visuais
-   - Verificar consistência lógica das regras
-   - Calcular entropia de Shannon para cada estado possível
-   - Detectar contradições e estados inválidos
+b) Um **motor de validação algébrica** configurado para verificar a consistência lógica e calcular a entropia de Shannon;
 
-c) Um **compilador multi-target** configurado para:
-   - Transformar regras validadas em código executável
-   - Gerar código em múltiplas linguagens (Luau, Python, C#)
-   - Aplicar otimizações específicas de cada plataforma
-   - Inserir automaticamente opcodes de performance
+c) Um **módulo de inteligência ML Brain** caracterizado por utilizar Redes Neurais Convolucionais para predizer estados de colapso estáveis, acelerando o algoritmo de Wave Function Collapse (ML-WFC);
 
-d) Um **sistema de execução** configurado para:
-   - Executar código gerado
-   - Visualizar resultado em tempo real
-   - Fornecer métricas de performance
+d) Um **compilador multi-target** que gera código otimizado;
+
+e) Uma **arquitetura de execução em nuvem (Black Box)**, caracterizada por manter a lógica proprietária de geração em servidor remoto, entregando ao cliente apenas o resultado geométrico discretizado, protegendo a Propriedade Intelectual contra engenharia reversa.
 
 ### Reivindicação 2 (Dependente de 1)
 
-Sistema de acordo com a reivindicação 1, caracterizado pelo **motor de validação algébrica** utilizar entropia de Shannon calculada pela fórmula:
-
-```
-H(X) = -Σ p(x) log₂ p(x)
-```
-
-onde `p(x)` representa a probabilidade de cada tile possível em uma célula, para determinar qual célula colapsar primeiro no algoritmo Wave Function Collapse.
+Sistema de acordo com a reivindicação 1, caracterizado pelo **módulo ML Brain** utilizar heurísticas preditivas para reduzir o espaço de busca do algoritmo de colapso, modulando a entropia de Shannon com base em padrões estéticos pré-treinados.
 
 ### Reivindicação 3 (Dependente de 1)
 
-Sistema de acordo com a reivindicação 1, caracterizado pelo **compilador multi-target** aplicar automaticamente otimizações específicas da plataforma Roblox Luau, incluindo:
-
-- Uso de opcode `GETIMPORT` para acesso a variáveis globais imutáveis
-- Uso de opcode `DUPCLOSURE` para reutilização de closures em loops
-- Bit-packing de matrizes booleanas para redução de memória
-
-### Reivindicação 4 (Dependente de 1)
-
-Sistema de acordo com a reivindicação 1, caracterizado por implementar **compilação bidirecional**, permitindo:
-
-- Conversão de regras visuais para código executável (compilação)
-- Conversão de código existente para representação visual (decompilação)
-
-### Reivindicação 5 (Independente - Método)
-
-**Método de compilação de intenção visual para geração procedural de conteúdo**, caracterizado por compreender as etapas de:
-
-a) **Capturar** intenção do usuário através de interface visual drag-and-drop, registrando definições de tiles e regras de adjacência;
-
-b) **Validar** algebricamente as regras capturadas, incluindo:
-   - Construção de matriz de adjacência
-   - Verificação de consistência lógica
-   - Cálculo de entropia de Shannon
-   - Detecção de contradições
-
-c) **Compilar** regras validadas em código executável otimizado para plataforma alvo;
-
-d) **Executar** código gerado e visualizar resultado em tempo real.
-
-### Reivindicação 6 (Dependente de 5)
-
-Método de acordo com a reivindicação 5, caracterizado pela etapa de **validação** incluir verificação de que todas as células do grid têm entropia H(X) > 0, garantindo que não existem estados sem opções válidas.
-
-### Reivindicação 7 (Dependente de 5)
-
-Método de acordo com a reivindicação 5, caracterizado pela etapa de **compilação** incluir geração automática de código em múltiplas linguagens (Luau, Python, C#) a partir de uma única representação intermediária em formato JSON.
+Sistema de acordo com a reivindicação 1, caracterizado pela **arquitetura Black Box** utilizar um protocolo de sincronização leve (Cloud Connector) que injeta o resultado procedural diretamente em motores de jogo (Roblox, Unity, Godot) sem expor as funções geradoras.
 
 ---
 

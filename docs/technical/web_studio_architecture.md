@@ -1,39 +1,43 @@
-# 🌐 EZ Studios: Universal Web Hub Architecture (SaaS)
+# 🌐 EZ Studios: Universal Web Hub Architecture (SaaS v2.2.0)
 
-Expanding from a local engine to a globally accessible **Generative UI (GenUI)** platform for Quantum Architects.
+A globally accessible **Generative Intelligence Platform** for Quantum Architects.
 
-## 1. System Vision: The "One-Click" Procedural Cloud
-The Web Hub is the central nervous system of the EZ Ecosystem. It abstracts the complexity of the WFC/BSP engines behind a modern, adaptive web interface.
+## 1. System Vision: The "Black Box" Intelligence
+The Web Hub acts as the secure execution environment for the EZ Agnostic Core. By centralizing generation in the cloud, we provide:
+- **IP Fortress**: Proprietary algorithms (Intent Compiler, ML Brain) never leave our secure servers.
+- **ML Elasticity**: GPU-accelerated workers for real-time Neural Procedural generation.
 
-### Key Pillars:
-- **Generative UI (GenUI)**: Interfaces that recompose themselves based on the user's intent (e.g., switching from "Dungeon Builder" to "NPC Designer" on the fly).
-- **Agnostic API**: A unified Node.js/TypeScript backend running the Core Engine v2.2.0.
-- **Visual Viewport**: Real-time 3D rendering via Three.js with full parity to destination engines.
-- **The "Bridge" Hub**: Direct integration with Roblox OpenCloud, GitHub (for Unity/Godot), and WebGL exports.
+### Core Strategic Pillars:
+- **Generative UI (GenUI)**: Adaptive web interface that evolves based on the user's semantic intent.
+- **ML Brain Interface**: Direct connection to our Procedural Neural Networks for predictive design.
+- **Universal Connectors**: Lightweight "Thin Client" plugins for Roblox, Unity, and Godot.
 
-## 2. Technical Stack
+## 2. Technical Stack (Cloud-Centric)
 | Layer | Technology | Role |
 |-------|------------|------|
-| **Frontend** | Next.js 15 + Three.js | High-fidelity UI & 3D Preview |
-| **Backend** | Node.js (Agnostic Core) | Intent Compiling & Procedural Logic |
-| **Logic Engine** | WFC + AC-3 + D4 Groups | Mathematical Foundation |
-| **Database** | PostgreSQL + Redis | User Assets, NFT Seeds, & Real-time Colab |
-| **Security** | Minor Protection Framework | ESG/Compliance Layer (LGPD/COPPA) |
+| **Frontend** | Next.js + Three.js | SaaS Portal & WOW Preview |
+| **Intelligence** | ML Brain (PyTorch) | Predictive Collapse & Style Transfer |
+| **Core** | Agnostic Core v2.2.0 | Mathematical Determinism (AC-3/WFC) |
+| **Bridge** | Cloud Connectors | Secure IP Dispatch to Engines |
 
-## 3. High-Level Flow (Mermaid)
+## 3. High-Level Architecture (Mermaid)
 
 ```mermaid
 graph TD
-    User((Quantum Architect)) --> Intent[Visual IDE / Natural Language]
-    Intent --> GenUI[Generative UI Adapts]
-    GenUI --> Core[EZ Agnostic Core v2.2.0]
-    Core --> Preview[Three.js Real-time Preview]
-    Preview --> User
-    Core --> Exporter{Universal Exporter}
-    Exporter --> Roblox[Roblox OpenCloud]
-    Exporter --> Unity[Unity Hub]
-    Exporter --> Godot[Godot Source]
-    Exporter --> NFT[NFT Minting / Asset Hub]
+    User((Arquiteto Quântico)) --> WebIDE[EZ Web Studio - SaaS]
+    
+    subgraph "EZ Cloud Secure Boundary (IP Black Box)"
+        WebIDE --> ML[ML BRAIN - Heuristics]
+        ML --> Core[AGNOSTIC CORE - Math]
+    end
+
+    subgraph "Universal Integration"
+        Core --> CC_R[Roblox Connector]
+        Core --> CC_U[Unity Connector]
+        Core --> CC_G[Godot Connector]
+    end
+    
+    CC_R --> RobloxStudio[Client Environment]
 ```
 
 ## 4. Strategic SaaS Revenue Streams

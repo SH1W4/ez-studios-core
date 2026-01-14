@@ -1,127 +1,78 @@
-# FORMALIZAÇÃO MATEMÁTICA - MOTOR EZ STUDIOS
+# FORMALIZAÇÃO MATEMÁTICA - AGNOSTIC AI ENGINE 🧠📐
 
-**DOCUMENTO**: Especificação Algébrica e Estocástica  
-**VERSÃO**: 1.0  
+**DOCUMENTO**: Especificação Algébrica, Estocástica e de Inteligência  
+**VERSÃO**: 2.2.0 (SaaS Era)  
 **AUTOR**: Antigravity AI (Protocolo Entropia Zero)
 
 ---
 
-## 1. WAVE FUNCTION COLLAPSE (WFC)
+## 1. WAVE FUNCTION COLLAPSE (WFC) & ML HEURISTICS
 
-O WFC é tratado como um problema de satisfação de restrições (CSP) em uma grade finita.
+O WFC é fundamentado como um problema de satisfação de restrições (CSP) em uma grade dimensional transfinita.
 
-### 1.1 Entropia de Shannon (H)
+### 1.1 Entropia de Shannon (H) Ponderada por IA
 
-Para cada célula $i$ na grade, a entropia é calculada para determinar o próximo ponto de colapso:
+Para cada célula $i$, a entropia original é agora modulada por um **Vetor de Heurística de IA** ($\hat{h}$):
 
-$$H(i) = -\sum_{j=1}^{n} p_j \log_2(p_j)$$
-
-Onde:
-- $n$ é o número de tiles possíveis para a célula $i$.
-- $p_j$ é a probabilidade relativa do tile $j$, baseada em seu peso $w_j$:
-  $$p_j = \frac{w_j}{\sum w}$$
-
-**Regra de Seleção**: O motor seleciona a célula com a menor entropia diferente de zero para colapsar primeiro ($H_{min} > 0$).
-
-### 1.2 Colapso e Propagação (Arc Consistency)
-
-Quando uma célula é colapsada para um estado único $T$, as restrições são propagadas para os vizinhos imediatos $V = \{N, S, E, O\}$.
-
-Seja $A \subset \Sigma$ o conjunto de tiles permitidos em uma célula vizinha. Após o colapso do vizinho em direção $d$, o novo conjunto $A'$ é:
-
-$$A' = A \cap \{ t \in \Sigma \mid \exists (T, t, d) \in \text{Regras} \}$$
-
-Se $A' = \emptyset$, ocorre uma **Contradição de Entropia**, e o algoritmo deve retroceder ou reiniciar.
-
----
-
-## 2. BINARY SPACE PARTITIONING (BSP) - EVOLUÇÃO 3D
-
-O BSP evoluiu de subdivisão de hiperplanos 2D para **Particionamento Volumétrico 3D**, permitindo masmorras multicamadas e estruturas complexas.
-
-### 2.1 Função de Divisão Cuboidal
-
-Seja um cuboide $C$ definido por $(x, y, z, w, h, d)$. A divisão ocorre se qualquer uma das dimensões exceder o dobro do tamanho mínimo $s_{min}$.
-
-A escolha do plano de corte $P$ (XY, YZ ou XZ) é estocástica, ponderada pela dimensão dominante:
-
-1. **Corte Vertical (X)**: Divide em $w$.
-2. **Corte Horizontal (Y)**: Divide em $h$.
-3. **Corte de Profundidade/Andar (Z)**: Divide em $d$ (multicamadas).
-
-A posição de corte $k$ segue a restrição de segurança:
-$$k \in [ s_{min}, \text{dimension}_{total} - s_{min} ]$$
-
-### 2.2 Topologia Multicamada
-Diferente do 2D, o BSP 3D gera uma árvore onde os nós folha são cuboides. Setores adjacentes no eixo Z são tratados como "andares" conectados por escadas ou elevadores (definidos via regras de adjacência WFC 3D).
-
----
-
-## 3. COMPILADOR DE INTENÇÃO (INTENT ALGEBRA)
-
-O compilador atua como uma função de transformação $f$ que mapeia a intenção do usuário $I$ em um plano de geração $G$.
-
-### 3.1 Vetor de Intenção
-
-$$I = \begin{bmatrix} \text{Dificuldade} \\ \text{Densidade} \\ \text{Bioma} \\ \text{Complexidade} \end{bmatrix}$$
-
-### 3.2 Transformação para Regras
-
-O compilador converte o vetor $I$ em parâmetros para os motores core:
-
-- **Densidade** $\rightarrow$ Modifica os pesos $w_j$ no WFC.
-- **Complexidade** $\rightarrow$ Define a profundidade $d$ no BSP.
-- **Bioma** $\rightarrow$ Seleciona o subconjunto de tiles $\Sigma_{subset}$.
-
-$$f(I) \Rightarrow \{ \Sigma, w, d, w_{min} \}$$
-
----
-
-## 4. OTIMIZAÇÃO LUAU (OPCODES)
-
-Para garantir a execução eficiente no Roblox, o código gerado segue o princípio de redução de custo de busca em tabelas globais.
-
-### 4.1 Teoria do Cache Import
-
-O uso de `local v3 = Vector3.new` vs `Vector3.new` em um loop de $n$ iterações:
-
-- **Custo Global**: $O(n \times \text{hash\_lookup})$
-- **Custo Local**: $O(1 \times \text{hash\_lookup} + n \times \text{register\_access})$
-
-O compilador automaticamente injeta "imports locais" para todas as funções matemáticas e construtores de tipos do Roblox para atingir o estado de **Entropia Zero de Execução**.
-
----
-
-## 5. GERAÇÃO HOLÍSTICA E ENTROPIA SEMÂNTICA
-
-A Geração Holística expande o formalismo do mapa para **Entidades Abstratas** (Personagens, Itens, Missões).
-
-### 5.1 Entropia Semântica ($H_s$)
-Para uma entidade $E$, a entropia não mede apenas posição, mas a **viabilidade funcional** de seus atributos:
-
-$$H_s(E) = -\sum_{k \in \text{Attributes}} \omega_k \log_2(\pi_k)$$
+$$H(i) = \alpha \left( -\sum_{j=1}^{n} p_j \log_2(p_j) \right) + (1-\alpha) \hat{h}_i$$
 
 Onde:
-- $\omega_k$: Importância do atributo (ex: Dano vs Estética).
-- $\pi_k$: Probabilidade de o valor do atributo ser válido perante as regras de balanço.
+- $\hat{h}_i$: Predição da Rede Neural sobre a estabilidade visual da célula $i$.
+- $\alpha$: Fator de confiança entre o rigor matemático puro e a predição semântica da IA.
 
-### 5.2 Álgebra de Atributos Procedurais
-Itens e personagens são gerados como grafos de sub-módulos. A consistência é garantida por uma **Matriz de Inerência**:
-
-$$I(A, B) = 1 \iff \text{Ator A pode portar Item B}$$
+### 1.2 Predictive Collapse (O Colapso Preditivo)
+Implementamos uma função de mapeamento $\Phi: I \rightarrow \Sigma$ que utiliza uma rede convolucional para inicializar pesos de tiles baseados na **intenção semântica**, reduzindo a complexidade de busca de $O(2^n)$ para quase $O(n)$ no melhor cenário de predição.
 
 ---
 
-## 6. ÁLGEBRA DE SIMETRIA E CONSISTÊNCIA DE ARCO
+## 2. TOPOLOGIA 3D MULTICAMADA (BSP-V)
 
-O motor utiliza a **Teoria de Grupos** e algoritmos de **Satisfação de Restrições (CSP)** para garantir a estabilidade do sistema.
+O Particionamento Espacial Binário Volumétrico (BSP-V) gera estruturas em $R^3$ com suporte nativo a gravidade e conectividade vertical.
 
-### 6.1 Grupo Diédrico $D_4$
-Cada tile $T$ é tratado como um elemento sob o grupo de simetria do quadrado. Aplicamos operadores de rotação ($R_{90}$) e reflexão ($F$) para reduzir a redundância de ativos:
+### 2.1 Função de Vizinhança Axial ($N_z$)
+Identificamos a adjacência em camadas $k$ e $k+1$ através de um gradiente de conectividade:
 
-$$R_{90} \circ R_{90}(T) = R_{180}(T)$$
+$$\forall z \in \mathbb{Z}, \exists \text{Portal}(z, z+1) \iff \text{Topology}(z) \cap \text{Topology}(z+1) \neq \emptyset$$
 
-Isso permite que um único modelo 3D gere 8 variações automáticas, reduzindo o custo de modelagem em 87.5%.
+Isso permite que o motor crie dungeons verticais coerentes onde elevadores e escadas são inseridos automaticamente para manter a **Consistência de Grafo** entre andares.
 
-### 6.2 Validação AC-3 (Arc Consistency)
-Para evitar estados insolúveis (*dead-ends*) no WFC, implementamos a consistência de arco. Antes de cada colapso, o motor verifica se para cada valor $x \in \text{Dominio}(X)$, existe um $y \in \text{Dominio}(Y)$ que satisfaz a matriz de adjacência.
+---
+
+## 3. ÁLGEBRA DE ESTÉTICA (AESTHETIC MAPPING)
+
+A "Art Finalization" é formalizada como uma transformação de estilo $\Psi$ que mapeia geometria agnóstica em shaders específicos.
+
+### 3.1 Função de Mapeamento de Estilo
+$$\Psi(\text{Geometry}, \text{Estetica}) \rightarrow \text{VisualAsset}$$
+
+- **Estética "Quantum"**: Aplica operadores de emissão $\epsilon > 0$ e materiais com transparência Fresnel.
+- **Estética "Cybernetic"**: Injeta modificadores de metalicidade $\mu \approx 1$ e iluminação neon pulsante.
+- **Estética "LowPoly"**: Simplifica o grafo de vértices e utiliza flat-shading com saturação elevada.
+
+---
+
+## 4. COMPILADOR DE INTENÇÃO SEMÂNTICA (SIC)
+
+O SIC atua como um sistema de **Inferência de Intenção**, convertendo linguagem natural em restrições matemáticas rígidas.
+
+### 4.1 Vetor de Espaço de Criação ($V_c$)
+O usuário define um ponto no espaço quadridimensional de criação:
+$$V_c = \langle \text{Aura}, \text{Densidade}, \text{Escopo}, \text{Risco} \rangle$$
+
+O compilador resolve a equação de balanço:
+$$\text{Constraint}_{\text{Total}} = \sum w_i V_{c,i}$$
+
+Isso garante que um mundo "Arriscado" e "Denso" gere automaticamente mais inimigos e caminhos estreitos no grafo de colapso.
+
+---
+
+## 5. IP & BLACK BOX SECURITY (O FOSSO LÓGICO)
+
+A lógica fundamental reside no **EZ Cloud Hub**. O código exportado para Engines (Luau/C#) é apenas o **Resultado Discretizado** da matemática complexa.
+
+### 5.1 Teoria do Resultado Discretizado
+Qualquer tentativa de engenharia reversa no cliente apenas revela o *ponto final* do colapso, mas não a função geradora $\Psi$, mantendo o **Sigredo Industrial** protegido por criptografia de ponta a ponta durante o deploy.
+
+---
+
+**Conclusão**: A formalização matemática 2.2.0 eleva o EZ Studios de um "ferramenta" para um "sistema proprietário de inteligência arquitetônica".

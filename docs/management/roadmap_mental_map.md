@@ -1,101 +1,79 @@
-# MAPA DE SESSÕES E ROADMAP DO SISTEMA
+# MAPA DE SESSÕES E ROADMAP DO SISTEMA (v2.2.0) 🗺️🚀
 
-**PROJETO**: EZ Studios - Protocolo Entropia Zero  
-**OBJETIVO**: Mapear o fluxo de experiência do usuário (UX) e o amadurecimento técnico do sistema.
+**PROJETO**: EZ Studios - Agnostic AI SaaS  
+**OBJETIVO**: Mapear a jornada do "Arquiteto Quântico" do onboarding web à monetização universal.
 
 ---
 
-## 🗺️ MAPA MENTAL DO ECOSSISTEMA
+## 🗺️ MAPA MENTAL DO ECOSSISTEMA (SaaS & AI)
 
 ```mermaid
 graph TD
-    A[USUÁRIO: Aluno/Criança] --> B{Ponto de Entrada}
-    B -->|Grátis| C[Landing Page / Tutorial WFC Demo]
-    B -->|Pago| D[Dashboard Principal]
-
-    D --> E[Trilha 1: Luau Pro - Lógica]
-    D --> F[Trilha 2: Mundos - PCG]
-    D --> G[Trilha 3: Dados - Memória]
-    D --> H[Trilha 4: Business - DevEx]
-
-    F --> I[Editor Visual de Regras]
-    I -->|Compilação| J[Compilador de Intenção]
-    J -->|Criação| K[Código Luau Otimizado]
-    K -->|Build| L[Roblox Studio Workspace]
-
-    L --> M[Marketplace UGC]
-    M -->|Venda| N[Receita de Robux]
-    N -->|DevEx| O[Dinheiro Real]
-
-    subgraph "Core Engine (Matemática Agnóstica)"
-        P[Wave Function Collapse]
-        Q[Binary Space Partitioning]
-        R[Shannon Entropy]
+    User[USUÁRIO: Arquiteto Quântico] --> WebHub[EZ CLOUD HUB - SaaS]
+    
+    subgraph "SaaS Intelligence Layer"
+        WebHub --> ML[ML BRAIN - IA Generativa]
+        ML --> Predictive[Predictive Collapse Heuristics]
+        ML --> Style[Aesthetic Style Transfer]
     end
 
-    subgraph "Adaptadores (Específicos)"
-        K1[Adaptador Roblox - Luau]
-        K2[Adaptador Unity - C#]
-        K3[Adaptador Web - Three.js]
+    subgraph "Agnostic Core v2.2.0"
+        WebHub --> Core[AGNOSTIC CORE - Matemática]
+        Core --> WFC[3D WFC / AC-3 Solver]
+        Core --> BSP[3D Volumetric BSP-V]
     end
 
-    J --> P
-    J --> Q
-    P --> R
-    
-    P --> K1
-    P --> K2
-    P --> K3
-    
-    K1 --> L1[Roblox Studio]
-    K2 --> L2[Unity Engine]
-    K3 --> L3[Browser Preview]
+    subgraph "Universal Integration"
+        Core --> Connectors[CLOUD CONNECTORS]
+        Connectors --> Roblox[Roblox Studio Bridge]
+        Connectors --> Unity[Unity Editor Plugin]
+        Connectors --> Godot[Godot Script Hub]
+    end
+
+    subgraph "Monetization & ESG"
+        Roblox --> DevEx[Monetização / DevEx]
+        WebHub --> Safety[EZ Safety - LGPD/COPPA]
+    end
 ```
 
 ---
 
-## 📅 ROADMAP DE SESSÕES (JORNADA DO ALUNO)
+## 📅 ROADMAP DE SESSÕES (JORNADA DO ARQUITETO)
 
-### Sessão 0: "O Colapso Inicial" (Minuto 0-10)
-- **Ação**: Criança escolhe um tema e vê o mundo gerado em 3 segundos.
-- **Hook**: "Como esse mundo foi criado? Quer aprender a controlar essa magia?"
+### Sessão 0: "Acentuando a Intenção" (Nuvem)
+- **Ação**: O usuário digita uma descrição semântica no Web Hub.
+- **Milestone**: O **ML Brain** interpreta a intenção e gera o blueprint inicial instantaneamente.
 
-### Sessão 1: "O Arquiteto de Regras" (Minuto 10-60)
-- **Foco**: Editor Visual (No-code).
-- **Tarefa**: Criar um pequeno vilarejo definindo onde "estrada" e "grama" podem se encontrar.
-- **Resultado**: Primeiro mapa exportado para Roblox.
+### Sessão 1: "Esculpindo a Matemática"
+- **Foco**: Editor de Adjacência e Pesos no browser.
+- **Tarefa**: Usar o preview em tempo real (Three.js) para ajustar a topologia do mundo.
+- **Aprendizado**: Lógica de restrições (AC-3) de forma visual.
 
-### Sessão 2: "Sintonizando a Entropia" (Semana 1)
-- **Foco**: Conceitos de WFC e Pesos.
-- **Tarefa**: Ajustar a probabilidade de surgir "lagos" ou "castelos".
-- **Aprendizado**: Variáveis e pesos algébricos.
+### Sessão 2: "Art Finalization & Estética"
+- **Foco**: Aesthetic Selector (Quantum, Cybernetic, etc).
+- **Tarefa**: Aplicar camadas de "WOW factor" que traduzem geometria em arte finalizada.
+- **Aprendizado**: Direção de arte assistida por IA.
 
-### Sessão 3: "Dungeons e Partições" (Semana 2)
-- **Foco**: Algoritmo BSP.
-- **Tarefa**: Criar uma arena de combate dividida em salas equilibradas.
-- **Aprendizado**: Geometria e divisão recursiva de espaço.
-
-### Sessão 4: "Otimização Hacker" (Semana 3)
-- **Foco**: Luau Opcodes.
-- **Tarefa**: Usar `GETIMPORT` para fazer o mapa construir 2x mais rápido.
-- **Aprendizado**: Performance de baixo nível de forma lúdica.
+### Sessão 3: "Deploy Universal (One-Click)"
+- **Foco**: Cloud Connectors.
+- **Tarefa**: Exportar o mundo gerado diretamente para Roblox ou Unity.
+- **Aprendizado**: Integração de sistemas e pipeline de produção profissional.
 
 ---
 
-## 📈 ROADMAP TÉCNICO (ENTREGA SISTÊMICA)
+## 📈 ROADMAP ESTRATÉGICO (GO-TO-MARKET)
 
-| Fase | Título | Milestone Técnico | Foco de Negócio |
-|------|--------|-------------------|-----------------|
-| **V1** | "Spark" | Motor WFC real ligado ao Editor React | Validação do "Momento Uau" |
-| **V2** | "Structure" | BSP Funcional + Sistema de Logs de Aluno | Retenção Educacional |
-| **V3** | "Economy" | Marketplace Alpha + Exportação Automática | Ciclo de Monetização |
-| **V4** | "Scale" | Suporte a 10.000+ partes via Chunking | Expansão B2B (Escolas) |
+| Versão | Codinome | Milestone Técnico | Foco de Investimento |
+|--------|----------|-------------------|-------------------|
+| **v2.2** | **Agnostic** | Core Cloud + Web Hub UI | **M&A Readiness / Seed** |
+| **v2.5** | **Neural** | ML Brain (Predictive Collapse) | **Series A (Scale)** |
+| **v3.0** | **Universal** | Mercado Global B2B (Escolas + Estúdios) | **Dominância de Mercado** |
 
 ---
 
-## ⚡ FLUXO DE "LIGAÇÃO DOS FIOS" (PRÓXIMOS PASSOS)
+## ⚡ FLUXO DE EXECUÇÃO (INTEGRAÇÃO TOTAL)
 
-1. **INPUT**: `Editor.tsx` (Lista de Tiles e Regras)
-2. **MIDDLE**: `intentCompiler.ts` (Recebe JSON do Editor e executa cálculos)
-3. **CALC**: `wfc.ts` (Gera a matriz de tiles final)
-4. **OUTPUT**: `educationalApi.ts` (Retorna o Código Luau para o aluno baixar)
+1. **WEB INPUT**: `Editor.tsx` captura a Intenção do Arquiteto.
+2. **AI PROCESSING**: `ml_brain` otimiza os pesos matemáticos (Heurística).
+3. **CORE ENGINE**: `intentCompiler.ts` resolve o colapso zero entropia.
+4. **CLOUD SYNC**: `webApi.ts` despacha o asset finalizado via Connectors.

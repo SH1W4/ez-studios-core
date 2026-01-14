@@ -1,76 +1,61 @@
-# EAP - ESTRUTURA ANALÍTICA DO PROJETO (WBS)
+# EAP - ESTRUTURA ANALÍTICA DO PROJETO (WBS) 📑
 
-**PROJETO**: EZ Studios - Protocolo Entropia Zero  
-**VERSÃO**: 1.0  
+**PROJETO**: EZ Studios - Agnostic AI SaaS  
+**VERSÃO**: 2.2.0 (Cloud-First)  
 **DATA**: 14 de Janeiro de 2026
 
 ---
 
-## 1. EZ STUDIOS PLATFORM (Raiz)
+## 1. EZ STUDIOS GLOBAL HUB (Raiz)
 
-### 1.1 GESTÃO E ESTRATÉGIA
-- **1.1.1 Jurídico e Propriedade Intelectual**
-  - 1.1.1.1 Registro de Patente (Intent Compiler)
-  - 1.1.1.2 Framework de Proteção de Menores (LGPD/COPPA)
-  - 1.1.1.3 Registro de Marcas (EZ Studios, Entropia Zero)
-  - 1.1.1.4 Contrato Social e Acordo de Acionistas
-- **1.1.2 Planejamento de Negócios**
-  - 1.1.2.1 Plano de Negócios Lean
-  - 1.1.2.2 Modelo de Precificação e Monetização
-  - 1.1.2.3 Pitch Deck para Investidores
-- **1.1.3 Acadêmico**
-  - 1.1.3.1 Proposta de PhD (Entropia Zero Protocol)
-  - 1.1.3.2 Metodologia de Validação Científica (N=100)
+### 1.1 GESTÃO E POSICIONAMENTO (M&A READY)
+- **1.1.1 Estratégia Corporativa**
+  - 1.1.1.1 Pitch Deck Série A (AI SaaS)
+  - 1.1.1.2 Modelo de Receita Recorrente (ARR)
+  - 1.1.1.3 Plano de Expansão Global South
+- **1.1.2 Governança e IP**
+  - 1.1.2.1 Patente: Compilador de Intenção Semântica
+  - 1.1.2.2 Compliance: LGPD/COPPA (Safety Engine)
+  - 1.1.2.3 Black-Box Cloud Architecture (IP Security)
 
-### 1.2 CORE E COMPILADOR
-- **1.2.1 Core Engine**
-  - 1.2.1.1 Algoritmos de Geração de Lógica
-  - 1.2.1.2 Otimização de Performance (Low-Latency)
-- **1.2.2 Compilador Visual**
-  - 1.2.2.1 Tradução de Blocos Visuais para Código
-  - 1.2.2.2 Validação Semântica e Sintática
-- **1.2.3 Adaptadores e Otimização**
-  - 1.2.3.1 Matriz de Otimização por Engine
-  - 1.2.3.2 Adaptador Roblox (Luau) - Performance de Elite
-  - 1.2.3.3 Adaptador Unity/Godot (Planejamento)
+### 1.2 EZ CLOUD HUB (SaaS LAYER)
+- **1.2.1 Visual Intent IDE (Web)**
+  - 1.2.1.1 Interface GenUI (React/Next.js)
+  - 1.2.1.2 Visualizador 3D (Three.js Bridge)
+  - 1.2.1.3 Estética Drag-and-Drop (Aesthetic Selector)
+- **1.2.2 Gestão de Ecossistema**
+  - 1.2.2.1 Dashboard de Aluno e Mentor
+  - 1.2.2.2 Marketplace de Blueprints (NFT Ready)
 
-### 1.3 FERRAMENTAS DE CRIAÇÃO
-- **1.3.1 Intent Compiler (Visual)**
-  - 1.3.1.1 Interface de Blocos Lógicos
-  - 1.3.1.2 Biblioteca de Componentes Pré-fabricados
-- **1.3.2 Editor de Mundo 3D**
-  - 1.3.2.1 Ferramentas de Escultura e Texturização
-  - 1.3.2.2 Editor de Adjacência Drag-and-Drop
-  - 1.3.2.3 Previewizador de Geração Simultânea
-- **1.3.3 Marketplace UGC**
-  - 1.3.3.1 Galeria de Assets de Alunos
-  - 1.3.3.2 Sistema de Checkout e Transações
-  - 1.3.3.3 Validador de Autoria (Pixel-Perfect)
+### 1.3 ML BRAIN (INTELLIGENCE LAYER)
+- **1.3.1 Neural Procedural Networks**
+  - 1.3.1.1 Heurística de Colapso Preditivo (ML-WFC)
+  - 1.3.1.2 AST (Aesthetic Style Transfer) de Geometria
+- **1.3.2 Processamento de Linguagem Natural**
+  - 1.3.2.1 Mapeamento Narração-para-Mundo (LLM Bridge)
 
-### 1.4 INFRAESTRUTURA E OPS
-- **1.4.1 Cloud e Backend**
-  - 1.4.1.1 API RESTful e Sincronização
-  - 1.4.1.2 Sistema de Logging e Observabilidade
-  - 1.4.1.3 Política de Segurança da Informação (PSI)
-- **1.4.2 DevOps**
-  - 1.4.2.1 Pipeline CI/CD (GitHub Actions)
-  - 1.4.2.2 Automação de Setup (Scripts Bash)
+### 1.4 AGNOSTIC CORE v2.2.0 (ENGINE LAYER)
+- **1.4.1 Núcleo Matemático**
+  - 1.4.1.1 Solver WFC/AC-3 (Zero Entropia)
+  - 1.4.1.2 Particionador BSP 3D Multicamada
+- **1.4.2 Agilidade de Vanguarda**
+  - 1.4.2.1 Compilador de Intent para Código IR
+  - 1.4.2.2 Sistema de Logs de Alta Performance (GlobalLogger)
 
-### 1.5 MARKETING E LANÇAMENTO
-- **1.5.1 Estratégia de Crescimento**
-  - 1.5.1.1 Campanha de Lançamento (Viral TikTok/YT)
-  - 1.5.1.2 Parcerias com Escolas e Influencers
-- **1.5.2 Conteúdo Educacional**
-  - 1.5.2.1 Gravação de Tutoriais e Aulas
-  - 1.5.2.2 Documentação de Suporte ao Aluno
+### 1.5 UNIVERSAL CONNECTORS (INTEGRATION LAYER)
+- **1.5.1 Conectores Nativos**
+  - 1.5.1.1 Roblox Bridge (Otimização Luau Opcode)
+  - 1.5.1.2 Unity & Godot Hub (.json/C#)
+- **1.5.2 Cloud Sync**
+  - 1.5.2.1 Protocolo de Exportação "One-Click"
 
 ---
 
-## DICIONÁRIO DA EAP (RESUMIDO)
+## DICIONÁRIO DA EAP (TOP-LEVEL)
 
-| Código | Pacote de Trabalho | Descrição | Responsável |
-|--------|--------------------|-----------|-------------|
-| 1.2.1  | CORE ENGINE        | Desenvolvimento e otimização dos algoritmos matemáticos base. | CTO |
-| 1.2.2  | COMPILADOR         | Tradução da linguagem visual da criança para lógica de máquina. | CTO |
-| 1.3.2  | EDITOR VISUAL      | Interface principal de criação onde ocorre o "Momento Uau". | UX/Fullstack |
-| 1.5.1  | GROWTH             | Aquisição Lean de alunos via canais de baixo custo. | Marketing |
+| Código | Pilar Estratégico | Missão Principal |
+|--------|-------------------|-------------------|
+| 1.2    | CLOUD HUB         | Prover a interface de criação "Uau" via Browser. |
+| 1.3    | ML BRAIN          | Reduzir custo computacional e aumentar realismo via IA. |
+| 1.4    | AGNOSTIC CORE     | Garantir rigor matemático e estabilidade fractal total. |
+| 1.5    | CONNECTORS        | Permitir a onipresença em qualquer motor de jogo. |
