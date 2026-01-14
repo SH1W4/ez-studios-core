@@ -11,6 +11,7 @@ Nosso **Compilador de Intenção** permite que uma criança de 10 anos domine al
 1. **Patente Pendente**: Único compilador visual que transforma intenção em IR agnóstica.
 2. **AC-3 Validation**: Estabilidade de geração que empresas AAA levam anos para construir.
 3. **Safety Engine**: Framework jurídico/técnico nativo para proteção de menores (LGPD/COPPA).
+4. **Art Finalization Layer**: Motor de modelagem procedural que entrega ativos com qualidade de estúdio (Neon, CSG, High-Fidelity Materials) automaticamente.
 
 ## 4. Tração e Modelo (M12-M24)
 - **ARR Projetado (M24)**: R$ 17,9 Milhões.

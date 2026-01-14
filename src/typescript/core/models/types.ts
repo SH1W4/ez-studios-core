@@ -106,6 +106,8 @@ export interface MarketplaceMetadata {
   colecao?: string;
   tags: string[];
   versaoMotor: string;
+  estetica?: "Quantum" | "Realistic" | "Cybernetic" | "LowPoly" | string;
+  nivelDetalhe?: number; // 1-5
 }
 
 /**
@@ -212,6 +214,17 @@ export interface PlanoDeGeracao {
    */
   codigoGerado: string;
   logs: LogEntrada[];
+}
+
+/**
+ * Metadados para a geração em si (não para o marketplace)
+ */
+export interface MetadadosGeracao {
+  hashGeracao: string;
+  timestamp: number;
+  versaoEngine: string;
+  estetica?: "Quantum" | "Realistic" | "Cybernetic" | "LowPoly";
+  nivelDetalhe?: number; // 1-5
 }
 
 /**

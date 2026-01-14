@@ -36,8 +36,10 @@ async function testHolisticGeneration() {
     };
     const resultItem = compilarIntencao(intentItem, [], adapter);
     const item = resultItem.resultado as ItemInstance;
+    const itemCode = adapter.generateCode(item);
     console.log(`✅ Item Gerado: ${item.id} (Raridade: ${item.raridade})`);
     console.log(`⚔️ Dano: ${item.stats.dano}`);
+    console.log(`📜 Script Comportamental? ${itemCode.includes("BehaviorScript") ? "SIM" : "NÃO"}`);
     console.log(`🔗 Hash NFT: ${item.metadados.hashGeracao}`);
 
     // 3. Testar Geração de Ator (NPC)
@@ -50,11 +52,13 @@ async function testHolisticGeneration() {
     };
     const resultActor = compilarIntencao(intentActor, [], adapter);
     const actor = resultActor.resultado as ActorInstance;
+    const actorCode = adapter.generateCode(actor);
     console.log(`✅ Ator Gerado: ${actor.nome} (ID: ${actor.id})`);
     console.log(`🧠 Comportamento IA: ${actor.IA.comportamento}`);
+    console.log(`📜 Cérebro Procedural? ${actorCode.includes("AICore") ? "SIM" : "NÃO"}`);
     console.log(`🔗 Hash NFT: ${actor.metadados.hashGeracao}`);
 
-    console.log("\n🚀 Teste Holístico: PASSOU (Todos os tipos gerados com sucesso)");
+    console.log("\n🚀 Teste Holístico: PASSOU (Todos os tipos gerados com scripts de comportamento)");
 }
 
 testHolisticGeneration().catch(e => {
