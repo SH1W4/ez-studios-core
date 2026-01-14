@@ -3,7 +3,7 @@
  * Contrato JSON para portabilidade
  */
 
-import { MapaGerado, Setor, TileInstance } from "./types";
+import { MapaGerado } from "./types";
 
 /**
  * Serializa um mapa gerado para JSON compacto

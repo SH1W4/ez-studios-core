@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { User, Settings, LogOut, Copy, Share2 } from "lucide-react";
+import { Settings, LogOut, Copy, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 

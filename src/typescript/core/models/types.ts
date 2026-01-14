@@ -165,6 +165,10 @@ export interface Intencao {
    * Parâmetros específicos da categoria
    */
   parametros: Record<string, any>;
+  /**
+   * Metadados IA e contextuais
+   */
+  metadados?: MarketplaceMetadata;
 }
 
 /**
@@ -198,6 +202,8 @@ export interface MapaGerado {
       numTiles: number;
       densidade?: number;
       tempoGeracaoMs?: number;
+      estetica?: string;
+      [key: string]: any;
     };
   };
 }
@@ -237,10 +243,11 @@ export interface LogEntrada {
   categoria: Intencao["categoria"];
   engineAlvo: "Roblox" | "Unity" | "Godot" | "Marketplace" | string;
   seed: string;
-  buildStatus: "success" | "error" | "warning";
+  buildStatus: "success" | "error" | "warning" | string;
   errorType?: string;
   errorMessage?: string;
-  duracao?: number;
+  duracao?: number | string;
+  stats?: { numSetores: number; numTiles: number; estetica?: string;[key: string]: any };
 }
 
 /**

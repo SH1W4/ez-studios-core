@@ -13,7 +13,7 @@ export class ThreeJsAdapter implements IEngineAdapter {
     /**
      * Gera um JSON estruturado para o renderer Web (v2.2.0)
      */
-    generateCode(entidade: any, options?: any): string {
+    generateCode(entidade: any, _options?: any): string {
         const estetica = entidade.metadados?.estetica || "Quantum";
 
         const data = {

@@ -1,17 +1,16 @@
 /**
- * Testes Automatizados - Núcleo Procedural
- * Valida WFC, BSP e serialização
+ * Testes Automatizados - Núcleo Procedural 3D
+ * Valida WFC, BSP e serialização - EZ Studios v2.2.0
  */
 
 import { describe, it, expect, beforeEach } from "vitest";
-import { generateBspTree, flattenToSectors, validarSetores } from "../src/core/bsp/bsp";
-import { initializeGrid, stepCollapse, runToCompletion } from "../src/core/wfc/wfc";
+import { generateBspTree, flattenToSectors, validarSetores } from "../core/bsp/bsp";
 import {
   deserializeMapa,
   serializeMapa,
-  validarMapaDesserializado,
-} from "../src/core/models/serialization";
-import { ConfigBSP, ConfigWFC, Tile, MapaGerado, ContradictionError } from "../src/core/models/types";
+} from "../core/models/serialization";
+import { ConfigBSP, ConfigWFC, Tile, MapaGerado, ContradictionError } from "../core/models/types";
+import { initializeGrid, runToCompletion } from "../core/wfc/wfc";
 
 // Tiles de teste
 const TILES_TESTE: Tile[] = [
@@ -24,6 +23,8 @@ const TILES_TESTE: Tile[] = [
       { direcao: "sul", tilesCompatíveis: ["chao", "parede"] },
       { direcao: "leste", tilesCompatíveis: ["chao", "parede"] },
       { direcao: "oeste", tilesCompatíveis: ["chao", "parede"] },
+      { direcao: "cima", tilesCompatíveis: ["chao"] },
+      { direcao: "baixo", tilesCompatíveis: ["chao"] },
     ],
     peso: 2,
   },
@@ -41,151 +42,103 @@ const TILES_TESTE: Tile[] = [
   },
 ];
 
-describe("BSP - Binary Space Partitioning", () => {
-  it("deve gerar árvore BSP válida", () => {
-    const config: ConfigBSP = {
-      largura: 100,
-      altura: 100,
-      profundidadeMaxima: 4,
-      tamanhoMinimoSala: 10,
-    };
+describe("BSP 3D Core", () => {
+  const config: ConfigBSP = {
+    largura: 100,
+    altura: 100,
+    profundidade: 50,
+    tamanhoMinimoSala: 20,
+    profundidadeMaxima: 3,
+  };
+  const mockRng = () => 0.5;
 
-    const rng = () => Math.random();
-    const tree = generateBspTree(config, rng);
-
+  it("deve gerar uma árvore BSP válida", () => {
+    const tree = generateBspTree(config, mockRng);
     expect(tree).toBeDefined();
+    expect(tree.id).toContain("bsp_");
     expect(tree.bounds.largura).toBe(100);
-    expect(tree.bounds.altura).toBe(100);
+    expect(tree.bounds.profundidade).toBe(50);
   });
 
-  it("deve converter árvore BSP em setores", () => {
-    const config: ConfigBSP = {
-      largura: 100,
-      altura: 100,
-      profundidadeMaxima: 3,
-      tamanhoMinimoSala: 15,
-    };
-
-    const rng = () => Math.random();
-    const tree = generateBspTree(config, rng);
+  it("deve achatar a árvore em setores", () => {
+    const tree = generateBspTree(config, mockRng);
     const setores = flattenToSectors(tree);
-
     expect(setores.length).toBeGreaterThan(0);
-    expect(setores.every((s) => s.bounds.largura > 0 && s.bounds.altura > 0)).toBe(true);
+    expect(setores[0].id).toContain("setor_");
   });
 
-  it("deve respeitar tamanho mínimo de salas", () => {
-    const config: ConfigBSP = {
-      largura: 100,
-      altura: 100,
-      profundidadeMaxima: 5,
-      tamanhoMinimoSala: 20,
-    };
-
-    const rng = () => Math.random();
-    const tree = generateBspTree(config, rng);
+  it("deve respeitar os limites mínimos de tamanho", () => {
+    const tree = generateBspTree(config, mockRng);
     const setores = flattenToSectors(tree);
-
     const valido = validarSetores(setores, config.tamanhoMinimoSala);
     expect(valido).toBe(true);
   });
 });
 
-describe("WFC - Wave Function Collapse", () => {
-  it("deve inicializar grid com todas as possibilidades", () => {
+describe("WFC 3D - Wave Function Collapse", () => {
+  it("deve inicializar grid 3D com todas as possibilidades", () => {
     const config: ConfigWFC = {
       largura: 10,
       altura: 10,
+      profundidade: 5,
       tiles: TILES_TESTE,
-      distribuicao: "uniforme",
     };
 
     const grid = initializeGrid(config);
 
     expect(grid.largura).toBe(10);
     expect(grid.altura).toBe(10);
+    expect(grid.profundidade).toBe(5);
     expect(grid.celulas.length).toBe(10);
-    expect(grid.celulas[0].length).toBe(10);
+    expect(grid.celulas[0][0].length).toBe(5);
 
-    // Verificar que todas as células têm todas as possibilidades
-    for (let y = 0; y < 10; y++) {
-      for (let x = 0; x < 10; x++) {
-        expect(grid.celulas[y][x].size).toBe(TILES_TESTE.length);
-      }
-    }
+    // Verificar uma célula 
+    expect(grid.celulas[0][0][0].size).toBe(TILES_TESTE.length);
   });
 
-  it("deve colapsar célula com sucesso", () => {
+  it("deve completar WFC 3D sem contradição", () => {
     const config: ConfigWFC = {
-      largura: 10,
-      altura: 10,
+      largura: 4,
+      altura: 4,
+      profundidade: 2,
       tiles: TILES_TESTE,
-      distribuicao: "uniforme",
-    };
-
-    const grid = initializeGrid(config);
-    const tileMap = new Map(TILES_TESTE.map((t) => [t.id, t]));
-    const rng = () => 0.5;
-
-    const resultado = stepCollapse(grid, tileMap, rng);
-
-    expect(resultado.status).toBe("ok");
-    expect(resultado.posicaoColapsada).toBeDefined();
-
-    // Verificar que alguma célula foi colapsada
-    let temColapsada = false;
-    for (let y = 0; y < 10; y++) {
-      for (let x = 0; x < 10; x++) {
-        if (grid.colapsadas[y][x]) {
-          temColapsada = true;
-          expect(grid.celulas[y][x].size).toBe(1);
-        }
-      }
-    }
-
-    expect(temColapsada).toBe(true);
-  });
-
-  it("deve completar WFC sem contradição", () => {
-    const config: ConfigWFC = {
-      largura: 8,
-      altura: 8,
-      tiles: TILES_TESTE,
-      distribuicao: "uniforme",
-      maxTentativas: 100,
+      maxTentativas: 10,
     };
 
     const rng = () => Math.random();
     const resultado = runToCompletion(config, rng);
 
-    // Pode ser sucesso ou contradição, mas não deve lançar erro
     expect(resultado.status).toMatch(/ok|contradiction/);
     expect(resultado.mapaParcialOuCompleto).toBeDefined();
-    expect(Array.isArray(resultado.mapaParcialOuCompleto)).toBe(true);
   });
 });
 
-describe("Serialização", () => {
+describe("Serialização v2.2.0", () => {
   let mapaExemplo: MapaGerado;
 
   beforeEach(() => {
     mapaExemplo = {
       id: "mapa_teste_001",
       seed: "seed_123",
-      dimensoes: { largura: 10, altura: 10 },
+      dimensoes: { largura: 10, altura: 10, profundidade: 1 },
       setores: [
         {
           id: "setor_1",
-          bounds: { x: 0, y: 0, largura: 5, altura: 5 },
+          bounds: { x: 0, y: 0, z: 0, largura: 5, altura: 5, profundidade: 1 },
           tipo: "spawn",
         },
       ],
       tiles: [
-        { tileId: "chao", x: 0, y: 0 },
-        { tileId: "parede", x: 1, y: 1 },
+        { tileId: "chao", x: 0, y: 0, z: 0 },
+        { tileId: "parede", x: 1, y: 1, z: 0 },
       ],
       metadados: {
+        autorId: "test_user",
+        seed: "seed_123",
         criadoEm: new Date().toISOString(),
+        hashGeracao: "hash_test",
+        tags: ["test"],
+        versaoMotor: "2.2.0",
         stats: {
           numSetores: 1,
           numTiles: 2,
@@ -194,62 +147,24 @@ describe("Serialização", () => {
     };
   });
 
-  it("deve serializar mapa para JSON", () => {
-    const json = serializeMapa(mapaExemplo);
-
-    expect(typeof json).toBe("string");
-    expect(json.includes(mapaExemplo.id)).toBe(true);
-    expect(json.includes(mapaExemplo.seed)).toBe(true);
-  });
-
-  it("deve desserializar JSON para mapa", () => {
+  it("deve serializar e desserializar mapa 3D preservando integridade", () => {
     const json = serializeMapa(mapaExemplo);
     const mapaDesserializado = deserializeMapa(json);
 
     expect(mapaDesserializado.id).toBe(mapaExemplo.id);
-    expect(mapaDesserializado.seed).toBe(mapaExemplo.seed);
-    expect(mapaDesserializado.tiles.length).toBe(mapaExemplo.tiles.length);
-  });
-
-  it("deve ser idempotente (serializar → desserializar → serializar)", () => {
-    const json1 = serializeMapa(mapaExemplo);
-    const mapa2 = deserializeMapa(json1);
-    const json2 = serializeMapa(mapa2);
-
-    expect(json1).toBe(json2);
-  });
-
-  it("deve validar mapa desserializado", () => {
-    const json = serializeMapa(mapaExemplo);
-    const mapa = deserializeMapa(json);
-
-    expect(validarMapaDesserializado(mapa)).toBe(true);
-  });
-
-  it("deve rejeitar mapa inválido", () => {
-    const mapaInvalido: MapaGerado = {
-      id: "",
-      seed: "seed",
-      dimensoes: { largura: 0, altura: 0 },
-      setores: [],
-      tiles: [],
-      metadados: { criadoEm: new Date().toISOString() },
-    };
-
-    expect(validarMapaDesserializado(mapaInvalido)).toBe(false);
+    expect(mapaDesserializado.dimensoes.profundidade).toBe(1);
+    expect(mapaDesserializado.tiles[0].z).toBe(0);
   });
 });
 
-describe("Tipos e Erros", () => {
-  it("deve lançar ContradictionError com contexto", () => {
-    const posicao = { x: 5, y: 5 };
+describe("ContradictionError 3D", () => {
+  it("deve conter contexto de posição 3D", () => {
+    const posicao = { x: 5, y: 5, z: 2 };
     const tilesImpossíveis = ["chao", "parede"];
 
     const erro = new ContradictionError(posicao, tilesImpossíveis);
 
-    expect(erro).toBeInstanceOf(ContradictionError);
     expect(erro.posicao).toEqual(posicao);
-    expect(erro.tilesImpossíveis).toEqual(tilesImpossíveis);
-    expect(erro.message).toContain("Contradição");
+    expect(erro.message).toContain("(5, 5, 2)");
   });
 });

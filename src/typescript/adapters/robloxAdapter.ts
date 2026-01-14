@@ -39,7 +39,6 @@ export class RobloxAdapter implements IEngineAdapter {
     }
 
     private generateMapCode(mapa: MapaGerado, opt: Required<RobloxAdapterOptions>): string {
-        const numTiles = mapa.tiles.length;
         let script = `-- EZ STUDIOS - Mapa Volumétrico 3D
 -- ID: ${mapa.id} | Hash: ${mapa.metadados.hashGeracao}
 
@@ -98,7 +97,7 @@ function MapBuilder.Build(workspace)
         return script;
     }
 
-    private generateItemCode(item: ItemInstance, opt: Required<RobloxAdapterOptions>): string {
+    private generateItemCode(item: ItemInstance, _opt: Required<RobloxAdapterOptions>): string {
         const behaviorScript = this.getItemBehaviorTemplate(item);
         const estetica = item.metadados.estetica || "Quantum";
 
@@ -188,7 +187,7 @@ script.Parent.Equipped:Connect(function()
 end)`;
     }
 
-    private generateActorCode(actor: ActorInstance, opt: Required<RobloxAdapterOptions>): string {
+    private generateActorCode(actor: ActorInstance, _opt: Required<RobloxAdapterOptions>): string {
         const aiScript = this.getActorAITemplate(actor);
         const estetica = actor.metadados.estetica || "Quantum";
 

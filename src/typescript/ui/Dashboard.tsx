@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Zap, Trophy, Star, TrendingUp, Plus, Play, Lock } from "lucide-react";
+import { Trophy, TrendingUp, Plus, Play, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import { useState, useEffect } from "react";
@@ -193,8 +193,8 @@ export default function Dashboard() {
                     <div
                       key={j}
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${j < trilha.nivelAtual
-                          ? "bg-primary text-background"
-                          : "bg-white/10 text-text-secondary"
+                        ? "bg-primary text-background"
+                        : "bg-white/10 text-text-secondary"
                         }`}
                     >
                       {j + 1}
@@ -239,8 +239,8 @@ export default function Dashboard() {
               <motion.div
                 key={badge.id}
                 className={`p-6 rounded-2xl border backdrop-blur-xl text-center transition-all duration-300 ${badge.desbloqueado
-                    ? "bg-primary/20 border-primary/50 hover:border-primary"
-                    : "bg-white/5 border-white/10 opacity-50"
+                  ? "bg-primary/20 border-primary/50 hover:border-primary"
+                  : "bg-white/5 border-white/10 opacity-50"
                   }`}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}

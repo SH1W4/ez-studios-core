@@ -117,8 +117,9 @@ export function logIntentAndBuild(
 
   const resultado = compilarIntencao(intencao, TILES_PADRAO, robloxAdapter, undefined, studentId);
 
+  const stats = (resultado.resultado as any).metadados?.stats;
   console.log(
-    `Build concluído: ${resultado.mapa.metadados.stats?.numTiles} tiles em ${resultado.mapa.metadados.stats?.tempoGeracaoMs}ms`
+    `Build concluído: ${stats?.numTiles || 0} tiles em ${stats?.tempoGeracaoMs || 0}ms`
   );
 
   return resultado;
@@ -145,7 +146,7 @@ export function obterEstatisticas(): {
   const sucessos = logs.filter((l) => l.buildStatus === "success").length;
   const erros = logs.filter((l) => l.buildStatus === "error").length;
   const tempoMedio =
-    logs.reduce((sum, l) => sum + (l.duracao || 0), 0) / Math.max(logs.length, 1);
+    logs.reduce((sum, l) => sum + (Number(l.duracao) || 0), 0) / Math.max(logs.length, 1);
 
   return {
     totalBuilds: logs.length,

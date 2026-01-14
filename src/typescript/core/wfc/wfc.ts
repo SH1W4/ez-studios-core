@@ -1,6 +1,6 @@
 /**
- * Wave Function Collapse (WFC) 2D Simplificado
- * Implementação com entropia de Shannon
+ * Wave Function Collapse (WFC) 3D - EZ Studios v2.2.0
+ * Implementação com entropia de Shannon e suporte volumétrico
  */
 
 import {
@@ -14,20 +14,19 @@ import {
 
 /**
  * Calcula entropia de Shannon para um conjunto de possibilidades
- * H = -Σ(p_i * log2(p_i))
  */
 function calcularEntropia(
   possibilidades: Set<string>,
   tiles: Map<string, Tile>
 ): number {
-  if (possibilidades.size === 0) return 0;
-  if (possibilidades.size === 1) return 0;
+  if (possibilidades.size <= 1) return 0;
 
   let entropia = 0;
-  const totalPeso = Array.from(possibilidades).reduce(
-    (sum, tileId) => sum + (tiles.get(tileId)?.peso || 1),
-    0
-  );
+  let totalPeso = 0;
+
+  for (const tileId of possibilidades) {
+    totalPeso += tiles.get(tileId)?.peso || 1;
+  }
 
   for (const tileId of possibilidades) {
     const peso = (tiles.get(tileId)?.peso || 1) / totalPeso;
@@ -40,31 +39,35 @@ function calcularEntropia(
 }
 
 /**
- * Inicializa grid com todas as possibilidades abertas
+ * Inicializa grid 3D com todas as possibilidades abertas
  */
 export function initializeGrid(config: ConfigWFC): GridWFC {
   const tileMap = new Map(config.tiles.map((t) => [t.id, t]));
-  const celulas: Set<string>[][] = [];
-  const entropias: number[][] = [];
-  const colapsadas: boolean[][] = [];
+  const celulas: Set<string>[][][] = [];
+  const entropias: number[][][] = [];
+  const colapsadas: boolean[][][] = [];
 
-  for (let y = 0; y < config.altura; y++) {
-    celulas[y] = [];
-    entropias[y] = [];
-    colapsadas[y] = [];
-
-    for (let x = 0; x < config.largura; x++) {
-      // Inicialmente, todas as possibilidades estão abertas
-      const possibilidades = new Set(config.tiles.map((t) => t.id));
-      celulas[y][x] = possibilidades;
-      entropias[y][x] = calcularEntropia(possibilidades, tileMap);
-      colapsadas[y][x] = false;
+  for (let x = 0; x < config.largura; x++) {
+    celulas[x] = [];
+    entropias[x] = [];
+    colapsadas[x] = [];
+    for (let y = 0; y < config.altura; y++) {
+      celulas[x][y] = [];
+      entropias[x][y] = [];
+      colapsadas[x][y] = [];
+      for (let z = 0; z < config.profundidade; z++) {
+        const possibilidades = new Set(config.tiles.map((t) => t.id));
+        celulas[x][y][z] = possibilidades;
+        entropias[x][y][z] = calcularEntropia(possibilidades, tileMap);
+        colapsadas[x][y][z] = false;
+      }
     }
   }
 
   return {
     largura: config.largura,
     altura: config.altura,
+    profundidade: config.profundidade,
     celulas,
     entropias,
     colapsadas,
@@ -72,17 +75,22 @@ export function initializeGrid(config: ConfigWFC): GridWFC {
 }
 
 /**
- * Encontra a célula com maior entropia (excluindo colapsadas)
+ * Encontra a célula com menor entropia (maior incerteza resolvida por entropia mínima > 0)
  */
-function encontrarCelulaMaiorEntropia(grid: GridWFC): { x: number; y: number } | null {
-  let maxEntropia = -1;
-  let posicao: { x: number; y: number } | null = null;
+function encontrarCélulaMínimaEntropia(grid: GridWFC): { x: number; y: number; z: number } | null {
+  let minEntropia = Infinity;
+  let posicao: { x: number; y: number; z: number } | null = null;
 
-  for (let y = 0; y < grid.altura; y++) {
-    for (let x = 0; x < grid.largura; x++) {
-      if (!grid.colapsadas[y][x] && grid.entropias[y][x] > maxEntropia) {
-        maxEntropia = grid.entropias[y][x];
-        posicao = { x, y };
+  for (let x = 0; x < grid.largura; x++) {
+    for (let y = 0; y < grid.altura; y++) {
+      for (let z = 0; z < grid.profundidade; z++) {
+        if (!grid.colapsadas[x][y][z]) {
+          const e = grid.entropias[x][y][z];
+          if (e > 0 && e < minEntropia) {
+            minEntropia = e;
+            posicao = { x, y, z };
+          }
+        }
       }
     }
   }
@@ -91,202 +99,120 @@ function encontrarCelulaMaiorEntropia(grid: GridWFC): { x: number; y: number } |
 }
 
 /**
- * Obtém vizinhos válidos de uma célula
+ * Obtém vizinhos em 3D
  */
-function obterVizinhos(
-  x: number,
-  y: number,
-  grid: GridWFC
-): { norte?: { x: number; y: number }; sul?: { x: number; y: number }; leste?: { x: number; y: number }; oeste?: { x: number; y: number } } {
-  const vizinhos: any = {};
-
-  if (y > 0) vizinhos.norte = { x, y: y - 1 };
-  if (y < grid.altura - 1) vizinhos.sul = { x, y: y + 1 };
-  if (x < grid.largura - 1) vizinhos.leste = { x: x + 1, y };
-  if (x > 0) vizinhos.oeste = { x: x - 1, y };
-
+function obterVizinhos3D(x: number, y: number, z: number, grid: GridWFC): Map<string, { x: number; y: number; z: number }> {
+  const vizinhos = new Map<string, { x: number; y: number; z: number }>();
+  if (x > 0) vizinhos.set("oeste", { x: x - 1, y, z });
+  if (x < grid.largura - 1) vizinhos.set("leste", { x: x + 1, y, z });
+  if (y > 0) vizinhos.set("sul", { x, y: y - 1, z });
+  if (y < grid.altura - 1) vizinhos.set("norte", { x, y: y + 1, z });
+  if (z > 0) vizinhos.set("baixo", { x, y, z: z - 1 });
+  if (z < grid.profundidade - 1) vizinhos.set("cima", { x, y, z: z + 1 });
   return vizinhos;
 }
 
 /**
- * Propaga restrições para vizinhos após colapso
+ * Propaga restrições em 3D
  */
-function propagarRestrições(
-  grid: GridWFC,
-  x: number,
-  y: number,
-  tiles: Map<string, Tile>
-): boolean {
-  const fila: Array<{ x: number; y: number }> = [{ x, y }];
-  const visitadas = new Set<string>();
+function propagarRestricoes(grid: GridWFC, startX: number, startY: number, startZ: number, tiles: Map<string, Tile>): boolean {
+  const fila: { x: number; y: number; z: number }[] = [{ x: startX, y: startY, z: startZ }];
 
   while (fila.length > 0) {
-    const { x: cx, y: cy } = fila.shift()!;
-    const chave = `${cx},${cy}`;
+    const cur = fila.shift()!;
+    const curPossibilidades = grid.celulas[cur.x][cur.y][cur.z];
+    const vizinhos = obterVizinhos3D(cur.x, cur.y, cur.z, grid);
 
-    if (visitadas.has(chave)) continue;
-    visitadas.add(chave);
+    for (const [direcao, viz] of vizinhos) {
+      const vizPossibilidades = grid.celulas[viz.x][viz.y][viz.z];
+      const validosParaVizinho = new Set<string>();
 
-    const tileColapsado = Array.from(grid.celulas[cy][cx])[0];
-    const tile = tiles.get(tileColapsado);
-
-    if (!tile) continue;
-
-    const vizinhos = obterVizinhos(cx, cy, grid);
-
-    // Verificar cada direção
-    for (const [direcao, vizinho] of Object.entries(vizinhos)) {
-      if (!vizinho) continue;
-
-      const { x: vx, y: vy } = vizinho;
-      const possibilidadesValidas = tile.conexoesPermitidas
-        .filter((c) => c.direcao === direcao)
-        .flatMap((c) => c.tilesCompatíveis);
-
-      if (possibilidadesValidas.length === 0) continue;
-
-      // Remover possibilidades inválidas do vizinho
-      const possibilidadesAntes = grid.celulas[vy][vx].size;
-      const novasPossibilidades = new Set(
-        Array.from(grid.celulas[vy][vx]).filter((id) =>
-          possibilidadesValidas.includes(id)
-        )
-      );
-
-      if (novasPossibilidades.size === 0) {
-        // Contradição!
-        return false;
+      for (const curTileId of curPossibilidades) {
+        const tile = tiles.get(curTileId);
+        if (!tile) continue;
+        const regras = tile.conexoesPermitidas.filter(r => r.direcao === direcao);
+        for (const r of regras) {
+          for (const compat of r.tilesCompatíveis) {
+            validosParaVizinho.add(compat);
+          }
+        }
       }
 
-      if (novasPossibilidades.size < possibilidadesAntes) {
-        grid.celulas[vy][vx] = novasPossibilidades;
-        grid.entropias[vy][vx] = calcularEntropia(novasPossibilidades, tiles);
-        fila.push({ x: vx, y: vy });
+      const novasPossibilidades = new Set<string>();
+      let mudou = false;
+
+      for (const vizTileId of vizPossibilidades) {
+        if (validosParaVizinho.has(vizTileId)) {
+          novasPossibilidades.add(vizTileId);
+        } else {
+          mudou = true;
+        }
+      }
+
+      if (novasPossibilidades.size === 0) return false;
+
+      if (mudou) {
+        grid.celulas[viz.x][viz.y][viz.z] = novasPossibilidades;
+        grid.entropias[viz.x][viz.y][viz.z] = calcularEntropia(novasPossibilidades, tiles);
+        fila.push(viz);
       }
     }
   }
-
   return true;
 }
 
 /**
- * Executa um passo de colapso WFC
+ * Passo de colapso
  */
-export function stepCollapse(
-  grid: GridWFC,
-  tiles: Map<string, Tile>,
-  rng: () => number
-): ResultadoColapso {
-  // Encontrar célula com maior entropia
-  const posicao = encontrarCelulaMaiorEntropia(grid);
+export function stepCollapse(grid: GridWFC, tiles: Map<string, Tile>, rng: () => number): ResultadoColapso {
+  const pos = encontrarCélulaMínimaEntropia(grid);
+  if (!pos) return { gridAtualizado: grid, status: "completo" };
 
-  if (!posicao) {
-    // Todas as células foram colapsadas
-    return {
-      gridAtualizado: grid,
-      status: "completo",
-    };
-  }
+  const possibilidades = Array.from(grid.celulas[pos.x][pos.y][pos.z]);
+  const totalPeso = possibilidades.reduce((s, id) => s + (tiles.get(id)?.peso || 1), 0);
+  let threshold = rng() * totalPeso;
+  let escolhido = possibilidades[0];
 
-  const { x, y } = posicao;
-  const possibilidades = Array.from(grid.celulas[y][x]);
-
-  if (possibilidades.length === 0) {
-    throw new ContradictionError(posicao, []);
-  }
-
-  // Escolher aleatoriamente um tile (ponderado por peso)
-  const totalPeso = possibilidades.reduce(
-    (sum, tileId) => sum + (tiles.get(tileId)?.peso || 1),
-    0
-  );
-
-  let sorteio = rng() * totalPeso;
-  let tileEscolhido = possibilidades[0];
-
-  for (const tileId of possibilidades) {
-    const peso = tiles.get(tileId)?.peso || 1;
-    sorteio -= peso;
-    if (sorteio <= 0) {
-      tileEscolhido = tileId;
+  for (const id of possibilidades) {
+    threshold -= (tiles.get(id)?.peso || 1);
+    if (threshold <= 0) {
+      escolhido = id;
       break;
     }
   }
 
-  // Colapsar célula
-  grid.celulas[y][x] = new Set([tileEscolhido]);
-  grid.entropias[y][x] = 0;
-  grid.colapsadas[y][x] = true;
+  grid.celulas[pos.x][pos.y][pos.z] = new Set([escolhido]);
+  grid.colapsadas[pos.x][pos.y][pos.z] = true;
+  grid.entropias[pos.x][pos.y][pos.z] = 0;
 
-  // Propagar restrições
-  const propagacaoOk = propagarRestrições(grid, x, y, tiles);
-
-  if (!propagacaoOk) {
-    throw new ContradictionError(posicao, Array.from(grid.celulas[y][x]));
+  if (!propagarRestricoes(grid, pos.x, pos.y, pos.z, tiles)) {
+    throw new ContradictionError(pos, [escolhido]);
   }
 
-  return {
-    gridAtualizado: grid,
-    status: "ok",
-    posicaoColapsada: posicao,
-  };
+  return { gridAtualizado: grid, status: "ok", posicaoColapsada: pos };
 }
 
-/**
- * Executa WFC até conclusão ou contradição
- */
-export function runToCompletion(
-  config: ConfigWFC,
-  rng: () => number
-): { mapaParcialOuCompleto: TileInstance[]; status: "ok" | "contradiction" } {
-  const tileMap = new Map(config.tiles.map((t) => [t.id, t]));
+export function runToCompletion(config: ConfigWFC, rng: () => number): { mapaParcialOuCompleto: TileInstance[]; status: "ok" | "contradiction" } {
   const grid = initializeGrid(config);
+  const tileMap = new Map(config.tiles.map(t => [t.id, t]));
 
   try {
-    while (true) {
-      const resultado = stepCollapse(grid, tileMap, rng);
+    let res: ResultadoColapso;
+    do {
+      res = stepCollapse(grid, tileMap, rng);
+    } while (res.status === "ok");
 
-      if (resultado.status === "completo") {
-        break;
-      }
-    }
-
-    // Converter grid para TileInstances
-    const tiles: TileInstance[] = [];
-    for (let y = 0; y < grid.altura; y++) {
-      for (let x = 0; x < grid.largura; x++) {
-        const tileId = Array.from(grid.celulas[y][x])[0];
-        if (tileId) {
-          tiles.push({
-            tileId,
-            x,
-            y,
-          });
-        }
-      }
-    }
-
-    return { mapaParcialOuCompleto: tiles, status: "ok" };
-  } catch (error) {
-    if (error instanceof ContradictionError) {
-      // Retornar mapa parcial
-      const tiles: TileInstance[] = [];
+    const instances: TileInstance[] = [];
+    for (let x = 0; x < grid.largura; x++) {
       for (let y = 0; y < grid.altura; y++) {
-        for (let x = 0; x < grid.largura; x++) {
-          if (grid.colapsadas[y][x]) {
-            const tileId = Array.from(grid.celulas[y][x])[0];
-            if (tileId) {
-              tiles.push({
-                tileId,
-                x,
-                y,
-              });
-            }
-          }
+        for (let z = 0; z < grid.profundidade; z++) {
+          const id = Array.from(grid.celulas[x][y][z])[0];
+          if (id) instances.push({ tileId: id, x, y, z });
         }
       }
-      return { mapaParcialOuCompleto: tiles, status: "contradiction" };
     }
-    throw error;
+    return { mapaParcialOuCompleto: instances, status: "ok" };
+  } catch (e) {
+    return { mapaParcialOuCompleto: [], status: "contradiction" };
   }
 }

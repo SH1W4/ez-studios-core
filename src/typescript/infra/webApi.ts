@@ -35,12 +35,12 @@ export interface ExportResponse {
  * Service placeholder for the SaaS Web Hub
  */
 export class EZApiService {
-    static async handleGenerate(req: GenerateRequest): Promise<GenerateResponse> {
+    static async handleGenerate(_req: GenerateRequest): Promise<GenerateResponse> {
         // Implementation will call the local compiler and chosen adapter
         throw new Error("Not implemented in CLI context");
     }
 
-    static async handleExport(req: ExportRequest): Promise<ExportResponse> {
+    static async handleExport(_req: ExportRequest): Promise<ExportResponse> {
         // Implementation will package the entity for the target engine
         throw new Error("Not implemented in CLI context");
     }

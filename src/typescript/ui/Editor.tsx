@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { Plus, Trash2, Download, Play } from "lucide-react";
+import { Plus, Trash2, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import { useState } from "react";
 import { compilarIntencao } from "../compiler/intentCompiler";
 import { RobloxAdapter } from "../adapters/robloxAdapter";
 import { ThreeJsAdapter } from "../adapters/threejsAdapter";
-import { Tile as EngineTile, Intencao, Regra as EngineRegra } from "../core/models/types";
+import { Tile as EngineTile, Intencao } from "../core/models/types";
 import { globalLogger } from "../infra/logging/logger";
 
 interface Tile {
@@ -115,7 +115,6 @@ export default function Editor() {
       };
 
       // 2. Executar Motor com Adaptador de Preview (ThreeJS)
-      const startTime = Date.now();
       const resultado = compilarIntencao(intencao, engineTiles, threeAdapter);
       const data = JSON.parse(resultado.codigoGerado);
 
@@ -127,8 +126,8 @@ export default function Editor() {
         intencao.categoria,
         "seed_" + Date.now(),
         threeAdapter.engineName,
-        { numSetores: 1, numTiles: data.tiles.length, estetica },
-        Date.now() - startTime
+        { numSetores: 1, numTiles: data.tiles.length, estetica: estetica || "Quantum" },
+        "COMPLETO"
       );
     } catch (error: any) {
       console.error("Erro na geração:", error);

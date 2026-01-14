@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Trophy, TrendingUp, Medal } from "lucide-react";
+import { Trophy, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import { useState } from "react";
@@ -162,11 +162,10 @@ export default function Leaderboard() {
               <button
                 key={f}
                 onClick={() => setFiltro(f)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                  filtro === f
+                className={`px-4 py-2 rounded-lg font-medium transition-all ${filtro === f
                     ? "bg-primary text-background"
                     : "bg-white/10 text-text-secondary hover:bg-white/20"
-                }`}
+                  }`}
               >
                 {f.charAt(0).toUpperCase() + f.slice(1).replace("-", " ")}
               </button>
