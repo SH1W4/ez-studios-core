@@ -35,20 +35,25 @@ Se $A' = \emptyset$, ocorre uma **Contradição de Entropia**, e o algoritmo dev
 
 ---
 
-## 2. BINARY SPACE PARTITIONING (BSP)
+## 2. BINARY SPACE PARTITIONING (BSP) - EVOLUÇÃO 3D
 
-O BSP é utilizado para subdivisão recursiva de um hiperplano 2D (espaço do mapa).
+O BSP evoluiu de subdivisão de hiperplanos 2D para **Particionamento Volumétrico 3D**, permitindo masmorras multicamadas e estruturas complexas.
 
-### 2.1 Função de Divisão Recursiva
+### 2.1 Função de Divisão Cuboidal
 
-Seja um retângulo $R$ definido por $(x, y, w, h)$. A divisão ocorre se $w > w_{min} \times 2$ ou $h > h_{min} \times 2$.
+Seja um cuboide $C$ definido por $(x, y, z, w, h, d)$. A divisão ocorre se qualquer uma das dimensões exceder o dobro do tamanho mínimo $s_{min}$.
 
-A posição de corte $k$ é escolhida aleatoriamente dentro de um intervalo de segurança $s$:
+A escolha do plano de corte $P$ (XY, YZ ou XZ) é estocástica, ponderada pela dimensão dominante:
 
-$$k \in [ \text{size}_{min}, \text{total}_{size} - \text{size}_{min} ]$$
+1. **Corte Vertical (X)**: Divide em $w$.
+2. **Corte Horizontal (Y)**: Divide em $h$.
+3. **Corte de Profundidade/Andar (Z)**: Divide em $d$ (multicamadas).
 
-A profundidade da árvore $d$ define o número máximo de partições $N$:
-$$N_{max} = 2^d$$
+A posição de corte $k$ segue a restrição de segurança:
+$$k \in [ s_{min}, \text{dimension}_{total} - s_{min} ]$$
+
+### 2.2 Topologia Multicamada
+Diferente do 2D, o BSP 3D gera uma árvore onde os nós folha são cuboides. Setores adjacentes no eixo Z são tratados como "andares" conectados por escadas ou elevadores (definidos via regras de adjacência WFC 3D).
 
 ---
 

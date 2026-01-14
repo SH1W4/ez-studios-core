@@ -20,7 +20,7 @@ Esta proposta de tese apresenta o **Protocolo Entropia Zero**, um framework inte
 3. **Inovação Técnica**: Compilador de Intenção Visual que transforma design em código otimizado
 4. **Validação Empírica**: Estudos com N=100+ crianças medindo eficácia educacional
 
-**Contribuição Original**: Primeira arquitetura que unifica geração procedural, educação de programação e proteção de menores em um sistema coerente baseado em princípios de minimização de entropia.
+**Contribuição Original**: Primeira arquitetura que unifica geração procedural, educação de programação e proteção de menores em um sistema coerente baseado em princípios de minimização de entropia. Introduz o conceito de **Motor Procedural Agnóstico** via *Engine Adapters*, permitindo a transposição de conceitos matemáticos entre plataformas (Roblox, Unity, Godot) sem perda de fidelidade pedagógica.
 
 **Impacto Esperado**: 
 - Redução de 40-60% no tempo de aprendizado de algoritmos complexos

@@ -12,10 +12,10 @@ export interface Tile {
   tags: string[];
   /**
    * Define quais tiles podem ser adjacentes em cada direção
-   * Direções: "norte", "sul", "leste", "oeste"
+   * Direções: "norte", "sul", "leste", "oeste", "cima", "baixo"
    */
   conexoesPermitidas: {
-    direcao: "norte" | "sul" | "leste" | "oeste";
+    direcao: "norte" | "sul" | "leste" | "oeste" | "cima" | "baixo";
     tilesCompatíveis: string[];
   }[];
   /**
@@ -31,6 +31,7 @@ export interface TileInstance {
   tileId: string;
   x: number;
   y: number;
+  z: number; // Coordenada vertical / andares
   /**
    * Metadados adicionais (cor, material, rotação, etc.)
    */
@@ -38,15 +39,17 @@ export interface TileInstance {
 }
 
 /**
- * Setor: divisão retangular do espaço (resultado de BSP)
+ * Setor: divisão volumétrica do espaço (cuboide, resultado de BSP 3D)
  */
 export interface Setor {
   id: string;
   bounds: {
     x: number;
     y: number;
+    z: number;
     largura: number;
     altura: number;
+    profundidade: number;
   };
   tipo: "spawn" | "hub" | "sala" | "boss" | "loja" | string;
   /**
@@ -104,6 +107,7 @@ export interface MapaGerado {
   dimensoes: {
     largura: number;
     altura: number;
+    profundidade: number;
   };
   /**
    * Setores criados por BSP
@@ -168,6 +172,7 @@ export interface LogEntrada {
 export interface ConfigWFC {
   largura: number;
   altura: number;
+  profundidade: number;
   tiles: Tile[];
   /**
    * Distribuição inicial: "uniforme" ou ponderada por peso
@@ -185,31 +190,34 @@ export interface ConfigWFC {
 export interface ConfigBSP {
   largura: number;
   altura: number;
+  profundidade: number;
   /**
-   * Profundidade máxima da árvore
+   * Profundidade máxima da árvore de recursão
    */
   profundidadeMaxima: number;
   /**
-   * Tamanho mínimo de uma sala
+   * Tamanho mínimo de uma sala em qualquer dimensão
    */
   tamanhoMinimoSala: number;
 }
 
 /**
- * Nó da árvore BSP
+ * Nó da árvore BSP 3D
  */
 export interface BspNode {
   id: string;
   bounds: {
     x: number;
     y: number;
+    z: number;
     largura: number;
     altura: number;
+    profundidade: number;
   };
   /**
-   * Direção de divisão: "horizontal" ou "vertical"
+   * Direção de divisão: "horizontal" (Y), "vertical" (X) ou "profundidade" (Z)
    */
-  direcao?: "horizontal" | "vertical";
+  direcao?: "horizontal" | "vertical" | "profundidade";
   esquerda?: BspNode;
   direita?: BspNode;
   /**
@@ -219,23 +227,25 @@ export interface BspNode {
 }
 
 /**
- * Grid para WFC
+ * Grid para WFC 3D
  */
 export interface GridWFC {
   largura: number;
   altura: number;
+  profundidade: number;
   /**
    * Cada célula contém um conjunto de possíveis tile IDs
+   * Estrutura: [x][y][z]
    */
-  celulas: Set<string>[][];
+  celulas: Set<string>[][][];
   /**
    * Entropia de Shannon para cada célula
    */
-  entropias: number[][];
+  entropias: number[][][];
   /**
    * Se célula foi colapsada
    */
-  colapsadas: boolean[][];
+  colapsadas: boolean[][][];
 }
 
 /**
@@ -244,7 +254,7 @@ export interface GridWFC {
 export interface ResultadoColapso {
   gridAtualizado: GridWFC;
   status: "ok" | "contradiction" | "completo";
-  posicaoColapsada?: { x: number; y: number };
+  posicaoColapsada?: { x: number; y: number; z: number };
 }
 
 /**
@@ -252,13 +262,13 @@ export interface ResultadoColapso {
  */
 export class ContradictionError extends Error {
   constructor(
-    public posicao: { x: number; y: number },
+    public posicao: { x: number; y: number; z: number },
     public tilesImpossíveis: string[],
     message?: string
   ) {
     super(
       message ||
-        `Contradição em WFC na posição (${posicao.x}, ${posicao.y}): nenhum tile válido`
+      `Contradição em WFC na posição (${posicao.x}, ${posicao.y}, ${posicao.z}): nenhum tile válido`
     );
     this.name = "ContradictionError";
   }

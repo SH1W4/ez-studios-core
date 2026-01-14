@@ -1,6 +1,6 @@
 /**
- * Binary Space Partitioning (BSP) para Divisão de Espaço
- * Gera setores retangulares para organização de mapas
+ * Binary Space Partitioning (BSP) 3D para Divisão de Espaço Volumétrico
+ * Gera setores cuboidais para organização de mapas multi-andares
  */
 
 import { BspNode, ConfigBSP, Setor } from "../models/types";
@@ -8,7 +8,7 @@ import { BspNode, ConfigBSP, Setor } from "../models/types";
 let nodeCounter = 0;
 
 /**
- * Gera árvore BSP recursivamente
+ * Gera árvore BSP 3D recursivamente
  */
 export function generateBspTree(config: ConfigBSP, rng: () => number): BspNode {
   nodeCounter = 0;
@@ -16,8 +16,10 @@ export function generateBspTree(config: ConfigBSP, rng: () => number): BspNode {
     {
       x: 0,
       y: 0,
+      z: 0,
       largura: config.largura,
       altura: config.altura,
+      profundidade: config.profundidade,
     },
     0,
     config,
@@ -26,10 +28,10 @@ export function generateBspTree(config: ConfigBSP, rng: () => number): BspNode {
 }
 
 /**
- * Recursão interna para geração de BSP
+ * Recursão interna para geração de BSP 3D
  */
 function generateBspTreeRecursivo(
-  bounds: { x: number; y: number; largura: number; altura: number },
+  bounds: { x: number; y: number; z: number; largura: number; altura: number; profundidade: number },
   profundidade: number,
   config: ConfigBSP,
   rng: () => number
@@ -39,13 +41,14 @@ function generateBspTreeRecursivo(
     bounds,
   };
 
-  // Critério de parada: profundidade máxima ou tamanho mínimo atingido
+  // Critério de parada: profundidade máxima ou tamanho mínimo atingido em todas as dimensões
   if (
     profundidade >= config.profundidadeMaxima ||
     (bounds.largura <= config.tamanhoMinimoSala &&
-      bounds.altura <= config.tamanhoMinimoSala)
+      bounds.altura <= config.tamanhoMinimoSala &&
+      bounds.profundidade <= config.tamanhoMinimoSala)
   ) {
-    // Criar setor folha
+    // Criar setor folha (cuboide)
     node.setor = {
       id: `setor_${node.id}`,
       bounds,
@@ -54,21 +57,17 @@ function generateBspTreeRecursivo(
     return node;
   }
 
-  // Decidir se divide horizontalmente ou verticalmente
-  const podeHorizontal = bounds.altura >= config.tamanhoMinimoSala * 2;
-  const podeVertical = bounds.largura >= config.tamanhoMinimoSala * 2;
+  // Decidir em qual eixo dividir
+  const podeDividirX = bounds.largura >= config.tamanhoMinimoSala * 2;
+  const podeDividirY = bounds.altura >= config.tamanhoMinimoSala * 2; // Roblox Y é vertical, mas meu tipo usa Altura para Y plano e Profundidade para Z vertical
+  const podeDividirZ = bounds.profundidade >= config.tamanhoMinimoSala * 2;
 
-  let direcao: "horizontal" | "vertical";
+  const opcoes: ("vertical" | "horizontal" | "profundidade")[] = [];
+  if (podeDividirX) opcoes.push("vertical");
+  if (podeDividirY) opcoes.push("horizontal");
+  if (podeDividirZ) opcoes.push("profundidade");
 
-  if (podeHorizontal && podeVertical) {
-    // Escolher aleatoriamente
-    direcao = rng() < 0.5 ? "horizontal" : "vertical";
-  } else if (podeHorizontal) {
-    direcao = "horizontal";
-  } else if (podeVertical) {
-    direcao = "vertical";
-  } else {
-    // Não pode dividir mais
+  if (opcoes.length === 0) {
     node.setor = {
       id: `setor_${node.id}`,
       bounds,
@@ -77,62 +76,63 @@ function generateBspTreeRecursivo(
     return node;
   }
 
+  // Escolher eixo aleatoriamente entre as opções válidas
+  const direcao = opcoes[Math.floor(rng() * opcoes.length)];
   node.direcao = direcao;
 
-  if (direcao === "horizontal") {
-    // Dividir horizontalmente (em Y)
-    const minAltura = Math.ceil(config.tamanhoMinimoSala);
-    const maxAltura = bounds.altura - minAltura;
-    const posicaoDivisao = minAltura + Math.floor(rng() * (maxAltura - minAltura));
+  if (direcao === "vertical") {
+    // Dividir em X
+    const min = Math.ceil(config.tamanhoMinimoSala);
+    const max = bounds.largura - min;
+    const corte = min + Math.floor(rng() * (max - min));
 
     node.esquerda = generateBspTreeRecursivo(
-      {
-        x: bounds.x,
-        y: bounds.y,
-        largura: bounds.largura,
-        altura: posicaoDivisao,
-      },
+      { ...bounds, largura: corte },
       profundidade + 1,
       config,
       rng
     );
 
     node.direita = generateBspTreeRecursivo(
-      {
-        x: bounds.x,
-        y: bounds.y + posicaoDivisao,
-        largura: bounds.largura,
-        altura: bounds.altura - posicaoDivisao,
-      },
+      { ...bounds, x: bounds.x + corte, largura: bounds.largura - corte },
+      profundidade + 1,
+      config,
+      rng
+    );
+  } else if (direcao === "horizontal") {
+    // Dividir em Y
+    const min = Math.ceil(config.tamanhoMinimoSala);
+    const max = bounds.altura - min;
+    const corte = min + Math.floor(rng() * (max - min));
+
+    node.esquerda = generateBspTreeRecursivo(
+      { ...bounds, altura: corte },
+      profundidade + 1,
+      config,
+      rng
+    );
+
+    node.direita = generateBspTreeRecursivo(
+      { ...bounds, y: bounds.y + corte, altura: bounds.altura - corte },
       profundidade + 1,
       config,
       rng
     );
   } else {
-    // Dividir verticalmente (em X)
-    const minLargura = Math.ceil(config.tamanhoMinimoSala);
-    const maxLargura = bounds.largura - minLargura;
-    const posicaoDivisao = minLargura + Math.floor(rng() * (maxLargura - minLargura));
+    // Dividir em Z (Profundidade / Andares)
+    const min = Math.ceil(config.tamanhoMinimoSala);
+    const max = bounds.profundidade - min;
+    const corte = min + Math.floor(rng() * (max - min));
 
     node.esquerda = generateBspTreeRecursivo(
-      {
-        x: bounds.x,
-        y: bounds.y,
-        largura: posicaoDivisao,
-        altura: bounds.altura,
-      },
+      { ...bounds, profundidade: corte },
       profundidade + 1,
       config,
       rng
     );
 
     node.direita = generateBspTreeRecursivo(
-      {
-        x: bounds.x + posicaoDivisao,
-        y: bounds.y,
-        largura: bounds.largura - posicaoDivisao,
-        altura: bounds.altura,
-      },
+      { ...bounds, z: bounds.z + corte, profundidade: bounds.profundidade - corte },
       profundidade + 1,
       config,
       rng
@@ -143,7 +143,7 @@ function generateBspTreeRecursivo(
 }
 
 /**
- * Converte árvore BSP em lista de setores (folhas)
+ * Converte árvore BSP 3D em lista de setores (folhas)
  */
 export function flattenToSectors(tree: BspNode): Setor[] {
   const setores: Setor[] = [];
@@ -162,11 +162,13 @@ export function flattenToSectors(tree: BspNode): Setor[] {
 }
 
 /**
- * Valida que todos os setores respeitam tamanhos mínimos
+ * Valida que todos os setores respeitam tamanhos mínimos em todas as dimensões
  */
 export function validarSetores(setores: Setor[], tamanhoMinimo: number): boolean {
   return setores.every(
     (setor) =>
-      setor.bounds.largura >= tamanhoMinimo && setor.bounds.altura >= tamanhoMinimo
+      setor.bounds.largura >= tamanhoMinimo &&
+      setor.bounds.altura >= tamanhoMinimo &&
+      setor.bounds.profundidade >= tamanhoMinimo
   );
 }
