@@ -1,7 +1,7 @@
-# 🌌 EZ Studios: Core Engine v2.3.0
+# 🌌 EZ Studios: Core Engine v2.0
 > **Entropia Zero Protocol** | Transforming the Next Generation of Consumers into **Quantum Architects**.
 
-![EZ Studios Banner](./assets/social_preview.png)
+![EZ Studios Banner](./assets/concepts/agnostic_banner.png)
 
 [**Read in Portuguese / Leia em Português**](#%EF%B8%8F-ez-studios-core-engine-v20-pt-br)
 
