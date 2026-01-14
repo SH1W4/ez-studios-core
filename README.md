@@ -1,14 +1,14 @@
 # 🌌 EZ Studios: Core Engine v2.0
 > **Entropia Zero Protocol** | Transforming the Next Generation of Consumers into **Quantum Architects**.
 
-![EZ Studios Banner](file:///Users/jx/Desktop/ROBLOX_$$$/assets/concepts/banner_EZ.png)
+![EZ Studios Banner](./assets/concepts/banner_EZ.png)
 
 ---
 
 ## 💎 A Visão: De Jogador a Criador
 O **EZ Studios** não é apenas um motor de mapas; é a materialização do **Protocolo Entropia Zero**. Projetado para democratizar o desenvolvimento de jogos de alta complexidade, ele permite que estudantes e criadores gerem mundos, personagens e itens procedurais matematicamente perfeitos através de uma linguagem natural de intenções.
 
-![Quantum Architect Vision](file:///Users/jx/Desktop/ROBLOX_$$$/assets/concepts/Poster_Conceitual_EZ_STUDIO.png)
+![Quantum Architect Vision](./assets/concepts/Poster_Conceitual_EZ_STUDIO.png)
 
 ### 🧠 Geração Holística (PEG)
 Nosso diferencial reside na **Procedural Experience Generation**. O motor gera ecossistemas completos sob o mesmo rigor matemático:
@@ -16,21 +16,21 @@ Nosso diferencial reside na **Procedural Experience Generation**. O motor gera e
 - **Actor Factory**: Anatomia e IA procedurais.
 - **Item Algebra**: Balanceamento de atributos e raridade automática.
 
-![Holistic Showcase](file:///Users/jx/.gemini/antigravity/brain/08aff4da-d535-4967-9606-3dea7ddc86e6/holistic_showcase_peg_1768408304395.png)
+![Holistic Showcase](./assets/diagrams/holistic_showcase.png)
 
 ---
 
 ## 🛠️ Arquitetura Agnóstica: A Ponte Multi-Plataforma
 Diferente de ferramentas presas a uma única plataforma, o **EZ Studios Core** foi construído para ser universal. O núcleo matemático reside em um **IR (Intermediate Representation)** agnóstico, exportando código nativo para múltiplas engines.
 
-![Multi-Platform Bridge](file:///Users/jx/.gemini/antigravity/brain/08aff4da-d535-4967-9606-3dea7ddc86e6/multi_platform_bridge_ez_1768408519510.png)
+![Multi-Platform Bridge](./assets/diagrams/multi_platform_bridge.png)
 
 ---
 
 ## 🛡️ Safe Zone: Proteção e Pedagogia
 Integrado ao **Minor Protection Framework**, oferecemos um ambiente seguro para jovens desenvolvedores monetizarem seu talento com supervisão parental total.
 
-![Parental Dashboard](file:///Users/jx/.gemini/antigravity/brain/08aff4da-d535-4967-9606-3dea7ddc86e6/parental_dashboard_ez_1768408683777.png)
+![Parental Dashboard](./assets/dashboards/parental_dashboard.png)
 
 ---
 
