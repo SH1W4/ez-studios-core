@@ -12,13 +12,9 @@
 
 ![Quantum Architect Vision](./assets/concepts/Poster_Conceitual_EZ_STUDIO.png)
 
-### 🧠 Holistic Generation (PEG)
-Our differential lies in **Procedural Experience Generation**. The engine generates entire ecosystems under the same mathematical rigor:
-- **World Engine**: 3D volumetric partitioning via BSP and uncertainty collapse via WFC.
-- **Actor Factory**: Procedural anatomy and AI.
-- **Item Algebra**: Automatic attribute balancing and rarity.
+EZ Studios is more than a game engine; it is an **Agnostic Procedural Intelligence Hub**. Our core technology, now evolving into a **Cloud-First Generative AI SaaS**, abstracts complex mathematical structures (AC-3, $D_4$ Groups) into a seamless "Intent-to-Asset" pipeline. By decentralizing generation and centralizing intelligence in the cloud, we ensure maximum IP protection and infinite scalability for the next generation of UGC.
 
-![Holistic Showcase](./assets/diagrams/holistic_showcase.png)
+A EZ Studios é mais do que um motor de jogo; é um **Hub de Inteligência Procedural Agnóstica**. Nossa tecnologia principal, agora evoluindo para um **SaaS de IA Generativa Cloud-First**, abstrai estruturas matemáticas complexas (AC-3, Grupos $D_4$) em um pipeline contínuo de "Intenção para Ativo". Ao descentralizar a geração e centralizar a inteligência na nuvem, garantimos a proteção máxima de IP e escalabilidade infinita para a próxima geração de UGC.
 
 ---
 
@@ -29,24 +25,19 @@ Built to be universal, the **EZ Studios Core** operates on an agnostic **IR (Int
 
 ---
 
-## 🔒 The Strategic Moat: Enterprise-Grade Value
-EZ Studios is structured as a high-barrier **Intellectual Property (IP)** asset ready for strategic acquisition or scaling.
+## 🏰 The Strategic Moat / O Fosso Estratégico
 
-### 1. IP & Patent-Pending Compiler
-Our **Intent Compiler (Visual IR)** solves the "Creation Friction" problem, serving as a unique competitive advantage for any UGC platform.
+### 1. Intellectual Property (Black Box Cloud Core)
+Unlike local software, our **Agnostic Core** is hosted in a secure cloud environment. This "Black Box" architecture prevents reverse engineering and ensures that our proprietary algorithms (Intent Compiler) remain a protected corporate asset.
 
-### 2. High-Fidelity Rigor ($D_4$ & AC-3)
-Built on **Dihedral Group Theory** and **Arc Consistency** validation, ensuring 100% stable runtime generation.
+### 2. Neural Procedural Networks (ML-First)
+We are integrating Machine Learning to predict user architectural intent. This layer of "Predictive Math" reduces computational cost and allows for realistic style-transfer across different engine aesthetics (Quantum, Realistic, etc.).
 
-### 3. ESG & Minority Protection
-Natively compliant with **LGPD/COPPA**, eliminating legal liability for parent platforms.
+### 3. High-Fidelity Rigor (AC-3 & D4)
+The engine utilizes the **Arc-Consistency (AC-3)** algorithm and **Symmetry Groups ($D_4$)** to ensure 100% stable world generation. No "broken seeds" — only pure mathematical perfection.
 
----
-
-## 🛡️ Safe Zone: Protection & Pedagogy
-Integrated with the **Minor Protection Framework**, we provide a secure environment for young developers to monetize their talent with total parental supervision.
-
-![Parental Dashboard](./assets/dashboards/parental_dashboard.png)
+### 4. Minor Protection & ESG (Safety Engine)
+Fully compliant with **LGPD** and **COPPA**, our engine includes a native "Safety Layer" designed specifically for minor developers in the global south, providing a secure and educational ecosystem.
 
 ---
 

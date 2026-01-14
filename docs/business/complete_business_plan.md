@@ -26,6 +26,26 @@ O investimento em P&D inicial é **ZERO**, pois o núcleo tecnológico já está
 - ✅ **Integração**: Módulos Roblox/Luau prontos e testados
 - ✅ **Automação**: Scripts de setup e CI/CD configurados
 
+## 4. Monetização (SaaS & AI Model)
+Pivotamos de um modelo de licença estática para um modelo de recorrência **Cloud-First**:
+
+1. **Plano Arquiteto (Individual/Edu)**: R$ 49/mês. Acesso ao Web Studio, salvamento na nuvem e 100 gerações procedurais por mês.
+2. **Plano Professional (Estúdios Indie)**: R$ 299/mês. Exportação Ilimitada, Suporte a Unity/Godot, e Camada de Modelagem Procedural Avançada.
+3. **Plano Enterprise (UGC Platforms)**: Licenciamento de API sob demanda + Royalties de 2.5% sobre assets gerados (Modelo "Asset-as-a-Service").
+4. **Créditos de IA (ML Brain)**: Venda de pacotes de créditos para gerações que utilizem redes neurais pesadas de Style Transfer e Heurísticas ML.
+
+## 5. Estrutura de Custos e Infraestrutura
+- **R&D (Core Agnostic)**: Já desenvolvido (Custo Zero de P&D inicial).
+- **Infraestrutura Cloud**: AWS/GCP (Instâncias GPU para Inferência ML). Custo projetado de 15-20% do faturamento.
+- **Segurança**: Conformidade LGPD/COPPA automatizada via framework EZ Safety.
+
+## 6. Projeções Financeiras (M6-M24)
+- **M6 (Go-to-Market)**: 5.000 usuários ativos (Freemium).
+- **M12 (SaaS Expansion)**: 20.000 assinantes. ARR projetado de R$ 11.2 Milhões.
+- **M24 (Enterprise Dominance)**: Integração nativa com grandes plataformas de UGC. ARR projetado de R$ 28,5 Milhões.
+- ✅ **Integração**: Módulos Roblox/Luau prontos e testados
+- ✅ **Automação**: Scripts de setup e CI/CD configurados
+
 ### Financeiro (Projeções de Pesquisa - 3 Anos)
 
 | Métrica | Ano 1 (M12) | Ano 2 (M24) | Ano 3 |
