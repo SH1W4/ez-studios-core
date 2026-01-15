@@ -103,19 +103,19 @@ Evoluímos para um **SaaS Agêntico Premium**. Nossa nova estética cyberpunk (I
 - **Neural Assistant**: Um núcleo de IA totalmente animado que reage ao processamento.
 - **UI Glassmorphic**: Displays de alta transparência para imersão técnica.
 
-### 🧠 O que há de novo na v2.5.0
-- **Compilador Poliglota**: Suporte PT/EN com **Fuzzy Matching** (tolerância a erros).
-- **Core Isomórfico**: Motor roda nativamente no Navegador e Node.js.
-- **Ícones Customizados**: Iconografia EZ Studios via Sprite Sheets.
+![Quantum Architect Vision](./assets/concepts/Poster_Conceitual_EZ_STUDIO.png)
 
 ---
 
-## �️ Arquitetura Agnóstica
+## 🛠️ Arquitetura Agnóstica
 O núcleo matemático reside em uma **IR (Intermediate Representation)** agnóstica, exportando código nativo para múltiplas engines (Roblox, Unity, Godot, Web).
 
 ### Roadmap de Arquitetura
 - **v2.3.0 (O Cérebro e o Corpo)**: Introdução do Compilador de Intenção e Registro de Assets Poliglota.
 ![EZ Core v2.3.0 Architecture](./assets/diagrams/architecture_v2_3_brain_body.png)
+
+*(Anteriormente: Ponte Estática)*
+![Multi-Platform Bridge](./assets/diagrams/multi_platform_bridge.png)
 
 - **v2.5.0 (Ponte Neural)**: Upgrade com Cérebro Poliglota (PT/EN) e Assistant Neural para visualização em tempo real.
 ![Agentic Interface Flow](./assets/diagrams/mcp_agentic_flow_v2.png)
