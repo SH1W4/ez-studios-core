@@ -273,3 +273,8 @@ function criarRNG(seed: string): () => number {
     return state / 233280;
   };
 }
+
+export const intentCompiler = {
+  compilarIntencao,
+  compilarComPrompt,
+};

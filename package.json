@@ -10,7 +10,8 @@
     "test:watch": "vitest",
     "build": "tsc && vite build",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "mcp": "tsx src/typescript/mcp/server.ts"
   },
   "keywords": [
     "procedural",
@@ -44,6 +45,7 @@
     "vitest": "^1.0.0"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.2",
     "@radix-ui/react-slot": "^1.2.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
