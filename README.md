@@ -29,6 +29,11 @@ The new **Intent Compiler** (Brain) parses natural language into structural rule
 *(Previously: The Static Bridge)*
 ![Multi-Platform Bridge](./assets/diagrams/multi_platform_bridge.png)
 
+### v2.4.0 The Agentic Interface (MCP Protocol)
+The system is now fully controllable by AI Agents via the **Model Context Protocol (MCP)**. This allows autonomous agents to inspect logs, hot-reload templates, and visually preview generations before committing them.
+
+![Agentic Interface Flow](./assets/diagrams/mcp_agentic_flow_v2.png)
+
 ---
 
 ## 🆕 What's New in v2.3.0 (Polyglot Core)
