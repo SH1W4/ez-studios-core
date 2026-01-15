@@ -26,8 +26,12 @@ Built to be universal, the **EZ Studios Core** operates on an agnostic **IR (Int
 
 ### Architecture Roadmap
 - **v2.3.0 (The Brain & Body)**: Introduced the **Intent Compiler** and **Polyglot Asset Registry**.
-- **v2.5.0 (The Neural Bridge)**: Upgraded with a **Polyglot Brain** (PT/EN support, Fuzzy Matching) and the **Neural Assistant** for real-time visualization.
+![EZ Core v2.3.0 Architecture](./assets/diagrams/architecture_v2_3_brain_body.png)
 
+*(Previously: The Static Bridge)*
+![Multi-Platform Bridge](./assets/diagrams/multi_platform_bridge.png)
+
+- **v2.5.0 (The Neural Bridge)**: Upgraded with a **Polyglot Brain** (PT/EN support, Fuzzy Matching) and the **Neural Assistant** for real-time visualization.
 ![Agentic Interface Flow](./assets/diagrams/mcp_agentic_flow_v2.png)
 
 ---
@@ -106,7 +110,19 @@ Evoluímos para um **SaaS Agêntico Premium**. Nossa nova estética cyberpunk (I
 
 ---
 
-## 🔒 O "Moat" Estratégico
+## �️ Arquitetura Agnóstica
+O núcleo matemático reside em uma **IR (Intermediate Representation)** agnóstica, exportando código nativo para múltiplas engines (Roblox, Unity, Godot, Web).
+
+### Roadmap de Arquitetura
+- **v2.3.0 (O Cérebro e o Corpo)**: Introdução do Compilador de Intenção e Registro de Assets Poliglota.
+![EZ Core v2.3.0 Architecture](./assets/diagrams/architecture_v2_3_brain_body.png)
+
+- **v2.5.0 (Ponte Neural)**: Upgrade com Cérebro Poliglota (PT/EN) e Assistant Neural para visualização em tempo real.
+![Agentic Interface Flow](./assets/diagrams/mcp_agentic_flow_v2.png)
+
+---
+
+## �🔒 O "Moat" Estratégico
 1. **Compilador Patenteado**: Tecnologia proprietária que resolve a fricção de criação.
 2. **Rigor Científico ($D_4$ & AC-3)**: Estabilidade absoluta em tempo de execução.
 3. **ESG & Proteção**: Compliance nativo com LGPD/COPPA para menores.
