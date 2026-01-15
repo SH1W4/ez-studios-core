@@ -4,8 +4,8 @@
 
 **DEPOSITANTE**: [SEU NOME/EMPRESA]  
 **INVENTOR(ES)**: [SEU NOME]  
-**DATA**: 13 de Janeiro de 2026  
-**CLASSIFICAÇÃO IPC**: G06F 8/41 (Compiladores), G06T 11/00 (Geração de Imagens 2D)
+**DATA**: 15 de Janeiro de 2026  
+**CLASSIFICAÇÃO IPC**: G06F 8/41 (Compiladores), G06F 40/51 (Tradução/Linguagem Natural), G06T 11/00 (Geração de Imagens 2D)
 
 ---
 
@@ -35,11 +35,11 @@ Atualmente, a geração procedural de conteúdo em jogos digitais requer conheci
 
 A presente invenção tem como objetivos:
 
-1. Permitir que usuários sem conhecimento de programação criem regras de geração procedural através de interface visual intuitiva
-2. Compilar automaticamente essas regras visuais em código executável otimizado
-3. Gerar código compatível com múltiplas plataformas (Roblox Luau, Unity C#, Python)
-4. Validar algebricamente a consistência das regras antes da compilação
-5. Otimizar automaticamente o código gerado para performance em tempo real
+1. Permitir que usuários sem conhecimento de programação criem regras de geração procedural através de interface visual intuitiva e linguagem natural poliglota.
+2. Compilar automaticamente essas regras visuais e de intenção em código executável otimizado e isomórfico.
+3. Gerar código compatível com múltiplas plataformas (Roblox Luau, Unity C#, Python, Web/React).
+4. Validar algebricamente a consistência das regras antes da compilação e durante a pré-visualização isomórfica.
+5. Prover feedback visual em tempo real (Holographic Sync) sobre o estado de processamento da intenção.
 
 ---
 
@@ -65,10 +65,10 @@ A invenção consiste em um **Sistema de Compilação de Intenção Visual** que
    - Geração de código C# (Unity) [opcional]
    - Aplicação automática de otimizações específicas da plataforma
 
-4. **Sistema de Execução e Visualização**
-   - Preview em tempo real do resultado
-   - Métricas de performance
-   - Debugging visual de regras
+4. **Interface Agêntica e Visualização Neural (Neural Assistant)**
+   - Preview em tempo real do colapso de incerteza.
+   - Feedback visual de "pensamento" (Holographic Pulse/Glitch) sincronizado com o processamento da IA.
+   - Tradutor Poliglota Semântico (Tradução de Intenções PT/EN).
 
 ---
 
@@ -241,17 +241,19 @@ Entropia Média: 0.42
 
 **Características Únicas da Invenção**:
 
-1. **Compilação Bidirecional**: 
-   - Visual → Código (compilação)
-   - Código → Visual (decompilação para edição)
+1. **Execução Isomórfica Browser-Cloud**: 
+   - Capacidade do motor de compilação e geração rodar de forma idêntica em ambientes cliente (Vite/React) e servidores (Node.js), garantindo paridade absoluta de resultados.
 
-2. **Validação Algébrica Pré-Compilação**:
-   - Uso de Entropia de Shannon para detectar estados inválidos
-   - Verificação de consistência usando teoria dos grafos
+2. **Compilação Semântica Poliglota com Fuzzy Logic**:
+   - Mapeamento de intenções em múltiplas línguas naturais para uma representação intermediária (IR) canônica.
+   - Resiliência algoritímica a erros de grafia e ambiguidades gramaticais na entrada de intenção.
 
-3. **Otimização Consciente de Plataforma**:
-   - Aplicação automática de opcodes específicos (Luau: GETIMPORT, DUPCLOSURE)
-   - Adaptação de estruturas de dados por plataforma
+3. **Loop de Feedback Holográfico (Holographic Sync)**:
+   - Sincronização visual entre o estado de processamento da IA (idle, thinking, generating) e a interface do usuário através de animações de pulso e glitch, servindo como indicador de estabilidade do colapso.
+
+4. **Otimização Consciente de Plataforma**:
+   - Aplicação automática de opcodes específicos (Luau: GETIMPORT, DUPCLOSURE).
+   - Adaptação de estruturas de dados por plataforma.
 
 4. **Interface Educacional**:
    - Feedback visual de erros
@@ -274,7 +276,9 @@ c) Um **módulo de inteligência ML Brain** caracterizado por utilizar Redes Neu
 
 d) Um **compilador multi-target** que gera código otimizado;
 
-e) Uma **arquitetura de execução em nuvem (Black Box)**, caracterizada por manter a lógica proprietária de geração em servidor remoto, entregando ao cliente apenas o resultado geométrico discretizado, protegendo a Propriedade Intelectual contra engenharia reversa.
+f) Um **motor isomórfico de execução**, caracterizado pela capacidade de executar a lógica de geração procedural de forma idêntica em ambientes de navegador (Web/JS) e servidores de alta performance (Node.js/Cloud);
+
+g) Um **mapeador semântico poliglota**, caracterizado por converter intenções em linguagens naturais distintas (Portugês, Inglês, etc.) para uma Representação Intermediária (IR) agnóstica de engine via algoritmos de distância de tokens (Fuzzy Logic).
 
 ### Reivindicação 2 (Dependente de 1)
 
