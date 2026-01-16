@@ -32,6 +32,7 @@ import { intentDataStore } from "../data/intentDataStore";
 import { globalLLM } from "../compiler/llmAdapter";
 import { NeuralAssistant } from "./components/NeuralAssistant";
 import { ArtifactIngestor } from "./components/ArtifactIngestor";
+import { ServerlessAdapter } from "../infra/cloud/serverlessAdapter";
 
 // --- Components ---
 const Tooltip = ({ label }: { label: string }) => (
@@ -131,8 +132,8 @@ export default function Editor() {
       if (algorithm === "INTENT") {
         log(`> Neural Link estabelecido. Processando prompt...`);
 
-        // Use the new async AI compiler
-        const plano = await compilarComPrompt(prompt, DEFAULT_TILES, new RobloxAdapter());
+        // Use the Cloud-Ready Serverless Adapter
+        const plano = await ServerlessAdapter.compileIntent(prompt, DEFAULT_TILES);
         const intent = plano.intencao;
 
         setLastIntent(intent);

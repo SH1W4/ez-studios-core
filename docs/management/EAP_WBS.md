@@ -1,12 +1,18 @@
 # EAP - ESTRUTURA ANALÍTICA DO PROJETO (WBS) 📑
 
 **PROJETO**: EZ Studios - Agnostic AI SaaS  
-**VERSÃO**: 2.5.0 (Universal Semantic & Archetypal)  
+**VERSÃO**: 2.6.0 (Cloud & Serverless Update)  
 **DATA**: 16 de Janeiro de 2026
+**STATUS**: EXECUÇÃO (Fase 13)
 
 ---
 
-## 1. EZ STUDIOS GLOBAL HUB (Raiz)
+## 🏛️ Pilares Centrais (Core Pillars)
+
+1.  **Global Hub (Vercel)**: Interface Neural Neon descentralizada.
+2.  **ML Brain (AWS Lambda)**: Compilador de Intenções em ambiente seguro (Black-Box).
+3.  **Agnostic Core**: Motor de geração multiplataforma (BSP, WFC, MIRROR).
+4.  **Universal Connectors**: Adaptadores para Roblox, Unity e Unreal.
 
 ### 1.1 GESTÃO E POSICIONAMENTO (SOVEREIGN READY)
 - **1.1.1 Estratégia e Consciência**
