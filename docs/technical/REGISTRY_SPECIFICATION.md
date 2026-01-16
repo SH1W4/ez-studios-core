@@ -11,7 +11,8 @@ The **Polyglot Asset Registry v2.5.0** defines how static assets and algorithmic
 
 ### 2. Asset Schema
 Every asset must provide a `manifest.json` with the following:
-- **Concept Mapping**: Bilingual keys (e.g., `{"pt": "Fogo", "en": "Fire"}`).
+- **Semantic Concepts**: An array of language-agnostic concepts (e.g., `["fire", "elemental", "heat"]`).
+- **Concept Mapping**: (Legacy/Fallback) Bilingual keys (e.g., `{"pt": "Fogo", "en": "Fire"}`).
 - **Template Logic**: Path to the platform-specific implementation (e.g., `.lua` for Roblox).
 - **Constraint Rules**: Adjacency and compatibility data for the WFC engine.
 
@@ -29,7 +30,8 @@ O **Registro de Assets Poliglota v2.5.0** define como assets estáticos e templa
 
 ### 2. Esquema de Ativos (Schema)
 Cada asset deve fornecer um `manifest.json` contendo:
-- **Mapeamento de Conceitos**: Chaves bilíngues (ex: `{"pt": "Fogo", "en": "Fire"}`).
+- **Conceitos Semânticos**: Um array de conceitos agnósticos à língua (ex: `["fire", "elemental", "heat"]`).
+- **Mapeamento de Conceitos**: (Legado/Fallback) Chaves bilíngues (ex: `{"pt": "Fogo", "en": "Fire"}`).
 - **Lógica de Template**: Caminho para a implementação específica da plataforma (ex: `.lua` para Roblox).
 - **Regras de Restrição**: Dados de adjacência e compatibilidade para o motor de WFC.
 
