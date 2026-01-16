@@ -31,6 +31,7 @@ import { ConfigBSP, ConfigWFC, TileInstance, MapaGerado, Tile, Intencao } from "
 import { intentDataStore } from "../data/intentDataStore";
 import { globalLLM } from "../compiler/llmAdapter";
 import { NeuralAssistant } from "./components/NeuralAssistant";
+import { ArtifactIngestor } from "./components/ArtifactIngestor";
 
 // --- Components ---
 const Tooltip = ({ label }: { label: string }) => (
@@ -44,7 +45,7 @@ const IconButton = ({ icon: Icon, label, active = false, onClick }: { icon: any,
     onClick={onClick}
     className={`group relative p-3 rounded-xl transition-all duration-200 flex items-center justify-center
       ${active
-        ? "bg-primary text-black shadow-[0_0_15px_rgba(0,217,255,0.4)]"
+        ? "bg-core-green text-void-blue shadow-[0_0_15px_rgba(0,255,157,0.4)]"
         : "text-muted-foreground hover:text-white hover:bg-white/10"
       }`}
   >
@@ -54,10 +55,10 @@ const IconButton = ({ icon: Icon, label, active = false, onClick }: { icon: any,
 );
 
 const Panel = ({ title, children, className = "" }: { title: string, children: React.ReactNode, className?: string }) => (
-  <div className={`flex flex-col bg-[#0A0F1E]/90 backdrop-blur-xl border-r border-white/5 ${className}`}>
+  <div className={`flex flex-col glass border-r border-white/5 ${className}`}>
     <div className="h-12 border-b border-white/5 flex items-center px-4">
       <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-widest flex items-center gap-2">
-        <Cpu size={12} className="text-primary" />
+        <Cpu size={12} className="text-core-green" />
         {title}
       </h3>
     </div>
@@ -296,12 +297,12 @@ export default function Editor() {
   };
 
   return (
-    <div className="flex h-screen bg-[#050a14] text-foreground font-sans overflow-hidden">
+    <div className="flex h-screen bg-void-blue text-foreground font-sans overflow-hidden">
 
       {/* 1. Sidebar Tools */}
-      <aside className="w-16 flex flex-col items-center py-4 border-r border-white/5 bg-[#050a14] z-20">
+      <aside className="w-16 flex flex-col items-center py-4 border-r border-white/5 bg-void-blue z-20">
         <div className="mb-6">
-          <div onClick={() => navigate("/dashboard")} className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 transition-transform text-black font-bold font-mono">
+          <div onClick={() => navigate("/dashboard")} className="w-10 h-10 bg-core-green rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 transition-transform text-void-blue font-bold font-mono shadow-[0_0_15px_rgba(0,255,157,0.4)]">
             EZ
           </div>
         </div>
@@ -322,18 +323,18 @@ export default function Editor() {
         <div className="space-y-6">
 
           <div className="bg-white/5 p-1 rounded-lg flex gap-1">
-            <button className={`flex-1 py-1 text-[10px] font-bold rounded uppercase tracking-wider ${algorithm === "INTENT" ? "bg-primary text-black" : "text-muted-foreground"}`} onClick={() => setAlgorithm("INTENT")}>AI Mode</button>
+            <button className={`flex-1 py-1 text-[10px] font-bold rounded uppercase tracking-wider ${algorithm === "INTENT" ? "bg-core-green text-void-blue" : "text-muted-foreground"}`} onClick={() => setAlgorithm("INTENT")}>AI Mode</button>
             <button className={`flex-1 py-1 text-[10px] font-bold rounded uppercase tracking-wider ${algorithm !== "INTENT" ? "bg-white/10 text-white" : "text-muted-foreground"}`} onClick={() => setAlgorithm("BSP")}>Manual</button>
           </div>
 
           {algorithm === "INTENT" ? (
             <div className="space-y-4 animate-in fade-in slide-in-from-left-4 duration-300">
-              <div className="p-4 rounded-xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
-                <h4 className="flex items-center gap-2 text-primary font-bold text-sm mb-2">
-                  <Sparkles size={14} /> Natural Language
+              <div className="p-4 rounded-xl bg-core-green/5 border border-core-green/20">
+                <h4 className="flex items-center gap-2 text-core-green font-bold text-sm mb-2 uppercase tracking-widest">
+                  <Sparkles size={14} /> Intent Input
                 </h4>
                 <textarea
-                  className="w-full h-32 bg-black/20 text-white text-sm p-3 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary border border-white/5 resize-none placeholder:text-white/20"
+                  className="w-full h-32 bg-black/20 text-white text-sm p-3 rounded-lg focus:outline-none focus:ring-1 focus:ring-core-green/50 border border-white/5 resize-none placeholder:text-white/20"
                   placeholder="Ex: Uma masmorra medieval com corredores estreitos e poções mágicas..."
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
@@ -347,16 +348,16 @@ export default function Editor() {
 
               {lastIntent && (
                 <div className="space-y-2">
-                  <div className="p-3 rounded bg-white/5 border-l-2 border-secondary overflow-hidden">
+                  <div className="p-3 rounded bg-white/5 border-l-2 border-neural-violet overflow-hidden">
                     <div className="text-[10px] uppercase text-muted-foreground mb-1">Intent Parsed</div>
-                    <div className="text-xs font-mono text-secondary truncate">Category: {lastIntent.categoria}</div>
+                    <div className="text-xs font-mono text-neural-violet truncate">Category: {lastIntent.categoria}</div>
                     <div className="text-xs font-mono text-white/50 truncate">Tags: {lastIntent.parametros.tags.join(", ")}</div>
                   </div>
 
                   {!showCorrection ? (
                     <button
                       onClick={() => setShowCorrection(true)}
-                      className="text-[10px] text-muted-foreground hover:text-primary flex items-center gap-1 uppercase tracking-widest transition-colors"
+                      className="text-[10px] text-muted-foreground hover:text-core-green flex items-center gap-1 uppercase tracking-widest transition-colors"
                     >
                       <MessageSquare size={10} /> Corrigir interpretação (RLHF)
                     </button>
@@ -378,7 +379,7 @@ export default function Editor() {
                             setShowCorrection(false);
                             setCorrectionNote("");
                           }}
-                          className="flex-1 h-6 text-[9px] bg-primary text-black font-bold"
+                          className="flex-1 h-6 text-[9px] bg-core-green text-void-blue font-bold"
                         >
                           Salvar Correção
                         </Button>
@@ -397,7 +398,7 @@ export default function Editor() {
             </div>
           ) : algorithm === "BSP" ? (
             <div className="space-y-4 animate-in fade-in zoom-in duration-300">
-              <h4 className="text-xs font-bold text-primary border-l-2 border-primary pl-2 uppercase">BSP Volumétrico</h4>
+              <h4 className="text-xs font-bold text-core-green border-l-2 border-core-green pl-2 uppercase">BSP Volumétrico</h4>
               <div className="grid grid-cols-2 gap-2">
                 <div className="bg-white/5 p-2 rounded">
                   <label className="text-[10px] text-muted-foreground uppercase">Dimensão X</label>
@@ -411,7 +412,7 @@ export default function Editor() {
             </div>
           ) : (
             <div className="space-y-4 animate-in fade-in zoom-in duration-300">
-              <h4 className="text-xs font-bold text-secondary border-l-2 border-secondary pl-2 uppercase">WFC Tiling</h4>
+              <h4 className="text-xs font-bold text-neural-violet border-l-2 border-neural-violet pl-2 uppercase">WFC Tiling</h4>
               <div className="bg-white/5 p-2 rounded">
                 <label className="text-[10px] text-muted-foreground uppercase">Grid Size</label>
                 <input type="number" value={wfcConfig.largura} onChange={e => setWfcConfig({ ...wfcConfig, largura: +e.target.value, altura: +e.target.value })} className="w-full bg-transparent text-white font-mono text-sm border-b border-white/10 focus:outline-none" />
@@ -426,8 +427,8 @@ export default function Editor() {
               disabled={isGenerating}
               className={`w-full py-6 font-bold uppercase tracking-widest transition-all duration-300
                 ${isGenerating
-                  ? "bg-primary/20 text-primary animate-pulse border border-primary"
-                  : algorithm === "INTENT" ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] text-white" : "bg-gradient-to-r from-primary to-secondary hover:shadow-[0_0_20px_rgba(0,217,255,0.4)] text-black"
+                  ? "bg-core-green/20 text-core-green animate-pulse border border-core-green"
+                  : "bg-core-green text-void-blue hover:shadow-[0_0_20px_rgba(0,255,157,0.4)]"
                 }`}
             >
               {isGenerating ? "Processando..." : algorithm === "INTENT" ? "Compilar Intenção" : "Gerar"}
@@ -437,10 +438,21 @@ export default function Editor() {
               onClick={handleExport}
               disabled={!lastGeneratedMap || isGenerating}
               variant="outline"
-              className="w-full border-primary/30 text-primary hover:bg-primary/10 uppercase text-xs"
+              className="w-full border-core-green/30 text-core-green hover:bg-core-green/10 uppercase text-xs"
             >
               <Upload size={14} className="mr-2" /> Export to Roblox
             </Button>
+          </div>
+
+          <div className="pt-6 border-t border-white/5">
+            <ArtifactIngestor 
+              onIngest={(c) => {
+                log(`> Ingerindo artefato externo...`);
+                setPrompt(c);
+                setAlgorithm("INTENT");
+              }}
+              isProcessing={isGenerating}
+            />
           </div>
 
         </div>
@@ -452,11 +464,11 @@ export default function Editor() {
         <div className="h-12 border-b border-white/5 flex justify-between items-center px-6 bg-[#050a14]/80 backdrop-blur">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className={`w-2 h-2 rounded-full ${isGenerating ? "bg-yellow-500 animate-pulse" : "bg-green-500"}`} />
+              <span className={`w-2 h-2 rounded-full ${isGenerating ? "bg-yellow-500 animate-pulse" : "bg-core-green shadow-[0_0_8px_#00FF9D]"}`} />
               <span className="text-xs font-mono text-muted-foreground">{algorithm === "INTENT" ? "AI KERNEL" : "LOGIC CORE"}</span>
             </div>
             <div className="h-4 w-px bg-white/10" />
-            <span className="text-xs font-bold text-primary">MODO: {algorithm === "INTENT" ? "NATURAL LANGUAGE" : "MANUAL BUILDER"}</span>
+            <span className="text-xs font-bold text-core-green uppercase tracking-widest">MODE: {algorithm === "INTENT" ? "NEURAL INTENT" : "MANUAL BUILDER"}</span>
           </div>
           <div className="flex gap-2">
             <span className="text-[10px] font-mono text-muted-foreground self-center">
@@ -481,10 +493,10 @@ export default function Editor() {
                 {algorithm === "INTENT" ? (
                    <NeuralAssistant isProcessing={true} status="ANALYZING INTENT..." />
                 ) : (
-                  <div className="flex flex-col items-center">
-                    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary mb-4 shadow-[0_0_15px_#00d9ff]" />
-                    <span className="text-primary font-mono text-sm animate-pulse tracking-[0.2em]">INTENT ANALYZER...</span>
-                  </div>
+                    <div className="flex flex-col items-center">
+                      <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-core-green mb-4 shadow-[0_0_15px_#00FF9D]" />
+                      <span className="text-core-green font-mono text-sm animate-pulse tracking-[0.2em]">INTENT ANALYZER...</span>
+                    </div>
                 )}
               </div>
             )}
@@ -510,7 +522,7 @@ export default function Editor() {
         {/* Bottom Console */}
         <div className="h-48 border-t border-primary/20 bg-[#050a14]/95 backdrop-blur flex flex-col">
           <div className="px-4 py-2 border-b border-white/5 flex justify-between items-center">
-            <h3 className="text-xs font-bold text-primary flex items-center gap-2">
+            <h3 className="text-xs font-bold text-core-green flex items-center gap-2 uppercase tracking-widest">
               <TerminalIcon size={12} /> NEURAL LINK
             </h3>
           </div>
@@ -521,7 +533,7 @@ export default function Editor() {
                 {line}
               </div>
             ))}
-            <div className="animate-pulse text-primary">_</div>
+            <div className="animate-pulse text-core-green">_</div>
           </div>
         </div>
       </div>

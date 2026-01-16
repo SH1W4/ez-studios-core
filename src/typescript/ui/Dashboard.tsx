@@ -32,20 +32,20 @@ interface Badge {
 
 const HolographicGrid = () => (
   <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
-    <div className="absolute inset-0 bg-[#050a14]" />
-    <div className="absolute inset-0 bg-[linear-gradient(rgba(0,217,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,217,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]" />
-    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50" />
-    <div className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-t from-primary/10 to-transparent opacity-30" />
+    <div className="absolute inset-0 bg-void-blue" />
+    <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,157,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,157,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]" />
+    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-core-green/30 to-transparent opacity-50" />
+    <div className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-t from-core-green/5 to-transparent opacity-30" />
   </div>
 );
 
 const GlassCard = ({ children, className = "", delay = 0, hoverEffect = false }: { children: React.ReactNode, className?: string, delay?: number, hoverEffect?: boolean }) => (
   <motion.div
-    className={`relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xl shadow-xl ${className}`}
+    className={`relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xl shadow-xl glass ${className}`}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay, duration: 0.5, ease: "easeOut" }}
-    whileHover={hoverEffect ? { scale: 1.01, borderColor: "rgba(0, 217, 255, 0.4)", backgroundColor: "rgba(0, 217, 255, 0.05)" } : {}}
+    whileHover={hoverEffect ? { scale: 1.01, borderColor: "rgba(0, 255, 157, 0.4)", backgroundColor: "rgba(0, 255, 157, 0.03)" } : {}}
   >
     {/* Shine Effect */}
     <div className="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-transparent pointer-events-none" />
@@ -53,10 +53,10 @@ const GlassCard = ({ children, className = "", delay = 0, hoverEffect = false }:
   </motion.div>
 );
 
-const ProgressBar = ({ progress, colorClass = "from-primary to-secondary" }: { progress: number, colorClass?: string }) => (
+const ProgressBar = ({ progress, colorClass = "from-core-green to-neural-violet" }: { progress: number, colorClass?: string }) => (
   <div className="relative w-full h-2 bg-black/40 rounded-full overflow-hidden border border-white/5">
     <motion.div
-      className={`absolute top-0 left-0 h-full bg-gradient-to-r ${colorClass} shadow-[0_0_10px_rgba(0,217,255,0.5)]`}
+      className={`absolute top-0 left-0 h-full bg-gradient-to-r ${colorClass} shadow-[0_0_10px_rgba(0,255,157,0.5)]`}
       initial={{ width: 0 }}
       animate={{ width: `${progress}%` }}
       transition={{ duration: 1.5, ease: "easeOut" }}
@@ -87,8 +87,8 @@ export default function Dashboard() {
       xp: 100 + (metrics.totalXP / 2),
       nivelAtual: Math.floor(metrics.totalXP / 1000) + 1,
       nivelMaximo: 5,
-      color: "from-[#00D9FF] to-[#0066FF]",
-      icon: <Cpu size={24} className="text-[#00D9FF]" />,
+      color: "from-core-green to-blue-600",
+      icon: <Cpu size={24} className="text-core-green" />,
     },
     {
       id: "mundos",
@@ -135,18 +135,18 @@ export default function Dashboard() {
   const xpProxNivel = (nivel * 1000) - totalXP;
 
   return (
-    <div className="min-h-screen text-foreground font-sans selection:bg-primary/30">
+    <div className="min-h-screen text-foreground font-sans selection:bg-core-green/30">
       <HolographicGrid />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#050a14]/80 backdrop-blur-md">
+      <header className="sticky top-0 z-50 border-b border-white/5 bg-void-blue/80 backdrop-blur-md">
         <div className="container mx-auto px-6 h-16 flex justify-between items-center">
           <motion.div
             className="flex items-center gap-2 text-2xl font-bold tracking-tighter"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
           >
-            <div className="w-8 h-8 rounded bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-black font-mono text-lg">
+            <div className="w-8 h-8 rounded bg-core-green flex items-center justify-center text-void-blue font-mono text-lg shadow-[0_0_15px_rgba(0,255,157,0.4)]">
               EZ
             </div>
             <span className="bg-gradient-to-r from-white via-white/80 to-white/50 bg-clip-text text-transparent">
@@ -165,8 +165,8 @@ export default function Dashboard() {
                 key={item.label}
                 variant="ghost"
                 onClick={() => navigate(item.path)}
-                className={`text-sm font-medium transition-all ${item.active
-                  ? "text-primary bg-primary/10 hover:bg-primary/20"
+                className={`text-sm font-bold uppercase tracking-widest transition-all ${item.active
+                  ? "text-core-green bg-core-green/10 hover:bg-core-green/20"
                   : "text-muted-foreground hover:text-foreground hover:bg-white/5"
                   }`}
               >
@@ -177,8 +177,8 @@ export default function Dashboard() {
 
           <div className="flex items-center gap-4">
             <div className="hidden md:flex flex-col items-end mr-2">
-              <span className="text-xs text-muted-foreground">Nível {nivel}</span>
-              <span className="text-sm font-bold text-primary">{totalXP} XP</span>
+              <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">Nível {nivel}</span>
+              <span className="text-sm font-bold text-core-green">{totalXP} XP</span>
             </div>
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center">
               <span className="text-lg">👤</span>
@@ -197,14 +197,14 @@ export default function Dashboard() {
           <GlassCard className="col-span-2 p-8 flex flex-col justify-between" delay={0.1}>
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold border border-primary/20 uppercase tracking-widest">
-                  Status: Online
+                <span className="px-3 py-1 rounded-full bg-core-green/20 text-core-green text-[10px] font-bold border border-core-green/20 uppercase tracking-widest">
+                  Status: Neural Command Online
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-                Bem-vindo ao <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#00A3FF] to-secondary">
-                  Nexus de Criação
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight tracking-tighter">
+                Sovereign Architect <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-core-green via-core-green/80 to-neural-violet">
+                  Nexus Command
                 </span>
               </h1>
               <p className="text-lg text-muted-foreground max-w-lg mb-8">
@@ -215,34 +215,34 @@ export default function Dashboard() {
             <div className="flex gap-4">
               <Button
                 onClick={() => navigate("/editor")}
-                className="bg-primary text-black hover:bg-primary/90 font-bold px-8 py-6 text-lg shadow-[0_0_20px_rgba(0,217,255,0.3)] hover:shadow-[0_0_30px_rgba(0,217,255,0.5)] transition-all"
+                className="bg-core-green text-void-blue hover:bg-core-green/90 font-bold px-8 py-6 text-lg shadow-[0_0_20px_rgba(0,255,157,0.3)] hover:shadow-[0_0_30px_rgba(0,255,157,0.5)] transition-all uppercase tracking-widest"
               >
-                <Plus className="mr-2" /> Criar Novo Mundo
+                <Plus className="mr-2" /> New Intent
               </Button>
               <Button
                 variant="outline"
                 onClick={() => navigate("/marketplace")}
-                className="border-white/10 hover:bg-white/5 px-8 py-6 text-lg"
+                className="border-white/10 hover:bg-white/5 px-8 py-6 text-lg uppercase tracking-widest text-white"
               >
-                <Globe className="mr-2 text-secondary" /> Explorar Assets
+                <Globe className="mr-2 text-neural-violet" /> Sovereign Assets
               </Button>
             </div>
           </GlassCard>
 
           {/* Stats Card */}
           <GlassCard className="col-span-1 p-8" delay={0.2}>
-            <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-              <Activity className="text-secondary" /> Performance
+            <h3 className="text-xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tighter">
+              <Activity className="text-neural-violet" /> System Performance
             </h3>
 
             <div className="space-y-6">
               <div>
-                <div className="flex justify-between text-sm mb-2">
+                <div className="flex justify-between text-[10px] mb-2 uppercase tracking-widest">
                   <span className="text-muted-foreground">Progresso do Nível {nivel}</span>
                   <span className="text-foreground font-mono">{totalXP % 500} / 500 XP</span>
                 </div>
                 <ProgressBar progress={((totalXP % 500) / 500) * 100} />
-                <p className="text-xs text-right mt-1 text-primary/80">Faltam {xpProxNivel} XP para upar</p>
+                <p className="text-[10px] text-right mt-1 text-core-green/80 font-bold uppercase tracking-widest">Faltam {xpProxNivel} XP para upar</p>
               </div>
 
               <div className="grid grid-cols-2 gap-4 mt-8">
@@ -261,14 +261,14 @@ export default function Dashboard() {
 
         {/* Revenue Hub Section (Phase 37) */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <TrendingUp className="text-primary" /> Hub de Receitas (Multi-Channel)
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 uppercase tracking-tighter">
+            <TrendingUp className="text-core-green" /> Revenue command hub
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <GlassCard className="p-6" delay={0.3}>
-              <div className="text-sm text-muted-foreground mb-1">Marketplace (UGC)</div>
+              <div className="text-[10px] uppercase font-bold text-muted-foreground mb-1">Marketplace (UGC)</div>
               <div className="text-2xl font-bold text-white">R$ {metrics.revenueBySource.marketplace.toFixed(2)}</div>
-              <div className="mt-2 text-[10px] text-primary/60 font-mono">Commission: 60%</div>
+              <div className="mt-2 text-[10px] text-core-green/60 font-mono">Commission: 60%</div>
             </GlassCard>
             <GlassCard className="p-6" delay={0.4}>
               <div className="text-sm text-muted-foreground mb-1">Comissões Diretas</div>

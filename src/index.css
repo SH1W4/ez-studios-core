@@ -2,63 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
-
 :root {
-  /* Cyberpunk Palette */
-  --primary: #00D9FF;
-  --primary-foreground: #0A0E27;
-  --secondary: #FF006E;
-  --secondary-foreground: #FFFFFF;
-  --accent: #FFBE0B;
-  --accent-foreground: #0A0E27;
-  --tertiary: #8338EC;
-  --tertiary-foreground: #FFFFFF;
+  /* Neural Neon Palette v2.5.0 */
+  --primary: #00ff9d;
+  --primary-foreground: #0b0e14;
+  --secondary: #8a2be2;
+  --secondary-foreground: #ffffff;
+  --accent: #00ff9d;
+  --accent-foreground: #0b0e14;
 
   /* Backgrounds */
-  --background: #0A0E27;
-  --foreground: #FFFFFF;
-  --card: rgba(255, 255, 255, 0.05);
-  --card-foreground: #FFFFFF;
-  --popover: rgba(255, 255, 255, 0.05);
-  --popover-foreground: #FFFFFF;
-  --surface: rgba(255, 255, 255, 0.05);
-  --text-secondary: rgba(255, 255, 255, 0.7);
+  --background: #0b0e14;
+  --foreground: #ffffff;
+  --card: rgba(11, 14, 20, 0.4);
+  --card-foreground: #ffffff;
+  --popover: rgba(11, 14, 20, 0.8);
+  --popover-foreground: #ffffff;
+  --surface: rgba(255, 255, 255, 0.03);
 
   /* UI Elements */
-  --muted: rgba(255, 255, 255, 0.1);
-  --muted-foreground: rgba(255, 255, 255, 0.6);
-  --destructive: #FF006E;
-  --destructive-foreground: #FFFFFF;
-  --border: rgba(0, 217, 255, 0.2);
-  --input: rgba(255, 255, 255, 0.1);
-  --ring: #00D9FF;
+  --muted: rgba(255, 255, 255, 0.05);
+  --muted-foreground: rgba(255, 255, 255, 0.5);
+  --border: rgba(0, 255, 157, 0.15);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: #00ff9d;
+  --radius: 0.75rem;
+}
 
-  /* Sidebar */
-  --sidebar: #0A0E27;
-  --sidebar-foreground: #FFFFFF;
-  --sidebar-primary: #00D9FF;
-  --sidebar-primary-foreground: #0A0E27;
-  --sidebar-accent: rgba(0, 217, 255, 0.1);
-  --sidebar-accent-foreground: #00D9FF;
-  --sidebar-border: rgba(0, 217, 255, 0.2);
-  --sidebar-ring: #00D9FF;
+.glass {
+  background: rgba(11, 14, 20, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 157, 0.15);
+}
 
-  /* Charts */
-  --chart-1: #00D9FF;
-  --chart-2: #FF006E;
-  --chart-3: #FFBE0B;
-  --chart-4: #8338EC;
-  --chart-5: #FF006E;
+.cyber-border {
+  border: 1px solid;
+  border-image: linear-gradient(to bottom, #00ff9d, transparent) 1;
+}
 
-  /* Radius */
-  --radius: 0.65rem;
+.neural-scanner {
+  position: relative;
+  overflow: hidden;
+}
+
+.neural-scanner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 255, 157, 0.1),
+    transparent
+  );
+  animation: scan 3s infinite linear;
+}
+
+@keyframes scan {
+  to {
+    left: 150%;
+  }
 }
 
 .dark {
-  /* Cyberpunk Dark Theme (already set in :root) */
+  /* Inherited from root for consistent Neural Neon look */
 }
 
 @layer base {
@@ -84,7 +95,6 @@
 }
 
 @layer components {
-
   /**
    * Custom container utility that centers content and adds responsive padding.
    *
