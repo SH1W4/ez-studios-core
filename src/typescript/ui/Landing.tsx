@@ -283,48 +283,65 @@ export default function Landing() {
               levels: 5,
               color: "from-primary to-secondary",
               desc: "Blocos visuais → Sintaxe → Opcodes → Multithreading → Produção",
+              image: "/assets/track-luau.png"
             },
             {
               title: "Mundos",
               levels: 5,
               color: "from-secondary to-accent",
               desc: "WFC visual → Tilesets → WFC Luau → WFC 3D → Monetização",
+              image: "/assets/track-worlds.png"
             },
             {
               title: "Dados",
               levels: 5,
               color: "from-accent to-tertiary",
               desc: "Serialização → DataStore → Compressão → Distribuído → Mega",
+              image: "/assets/track-data.png"
             },
             {
               title: "Business",
               levels: 5,
               color: "from-tertiary to-primary",
               desc: "UGC básico → 3 itens → Produção em massa → Marketing → CEO",
+              image: "/assets/track-business.png"
             },
           ].map((trilha, i) => (
             <motion.div
               key={i}
-              className={`p-8 rounded-2xl bg-gradient-to-br ${trilha.color} opacity-20 hover:opacity-30 border border-white/10 backdrop-blur-xl transition-all duration-300 cursor-pointer group`}
+              className="relative p-8 rounded-2xl border border-white/10 backdrop-blur-xl transition-all duration-300 cursor-pointer group overflow-hidden h-64 flex flex-col justify-end shadow-2xl"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
             >
-              <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
-                {trilha.title}
-              </h3>
-              <p className="text-sm text-text-secondary mb-4">{trilha.desc}</p>
-              <div className="flex gap-2">
-                {Array.from({ length: trilha.levels }).map((_, j) => (
-                  <div
-                    key={j}
-                    className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold"
-                  >
-                    {j + 1}
-                  </div>
-                ))}
+              {/* Background Image with Gradient Overlay */}
+              <div className="absolute inset-0 z-0">
+                <img 
+                  src={trilha.image} 
+                  alt={trilha.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-t ${trilha.color} opacity-80 mix-blend-multiply`} />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/90" />
+              </div>
+
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-primary transition-colors flex items-center gap-2">
+                  {trilha.title}
+                </h3>
+                <p className="text-sm text-gray-200 mb-4 font-medium">{trilha.desc}</p>
+                <div className="flex gap-2">
+                  {Array.from({ length: trilha.levels }).map((_, j) => (
+                    <div
+                      key={j}
+                      className="w-8 h-8 rounded-full bg-black/50 border border-white/20 flex items-center justify-center text-xs font-bold text-white shadow-lg backdrop-blur-sm"
+                    >
+                      {j + 1}
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
