@@ -348,6 +348,86 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="preços" className="relative z-10 container mx-auto px-4 py-20">
+        <motion.h2
+          className="text-4xl md:text-5xl font-bold text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          Investimento em Soberania
+        </motion.h2>
+
+        <div className="grid md:grid-cols-3 gap-8 items-start">
+          {[
+            {
+              name: "Explorer",
+              price: "49,90",
+              desc: "Para iniciantes na jornada",
+              features: ["Acesso à Trilha Luau Pro", "Editor Básico", "10 Gerações/dia", "Suporte da Comunidade"],
+              highlight: false,
+              color: "border-white/10"
+            },
+            {
+              name: "Architect",
+              price: "99,90",
+              desc: "O padrão para criadores sérios",
+              features: ["Acesso Total (4 Trilhas)", "Motor WFC + BSP Completo", "Hosting Ilimitado", "Acesso ao Marketplace"],
+              highlight: true,
+              color: "border-primary shadow-[0_0_30px_rgba(0,255,157,0.3)] bg-primary/5"
+            },
+            {
+              name: "Sovereign",
+              price: "299,90",
+              desc: "Elite com infraestrutura dedicada",
+              features: ["Tudo do Architect", "Mentorias Semanais", "Cloud Build Serverless", "Taxa Zero no Marketplace"],
+              highlight: false,
+              color: "border-accent/50"
+            }
+          ].map((tier, i) => (
+            <motion.div
+              key={i}
+              className={`relative p-8 rounded-2xl border backdrop-blur-xl ${tier.color} ${tier.highlight ? 'scale-105 z-10' : 'bg-surface/50'} transition-all duration-300 hover:scale-[1.02]`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              {tier.highlight && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-background text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+                  Recomendado
+                </div>
+              )}
+              <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
+              <div className="flex items-baseline gap-1 mb-4">
+                <span className="text-xl text-text-secondary">R$</span>
+                <span className="text-5xl font-bold text-white">{tier.price}</span>
+                <span className="text-sm text-text-secondary">/mês</span>
+              </div>
+              <p className="text-sm text-text-secondary mb-8">{tier.desc}</p>
+              
+              <ul className="space-y-4 mb-8">
+                {tier.features.map((feat, j) => (
+                  <li key={j} className="flex items-center gap-2 text-sm">
+                    <div className={`w-1.5 h-1.5 rounded-full ${tier.highlight ? 'bg-primary' : 'bg-white/40'}`} />
+                    {feat}
+                  </li>
+                ))}
+              </ul>
+
+              <Button
+                className={`w-full font-bold py-6 ${tier.highlight ? 'bg-primary text-background hover:bg-primary/90' : 'bg-white/10 hover:bg-white/20 text-white'}`}
+                onClick={() => navigate("/dashboard")}
+              >
+                Escolher {tier.name}
+              </Button>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative z-10 container mx-auto px-4 py-20">
         <motion.div
