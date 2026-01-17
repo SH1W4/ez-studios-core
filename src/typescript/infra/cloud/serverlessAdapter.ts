@@ -39,6 +39,9 @@ export class ServerlessAdapter {
     }
 
     private static async localFallback(prompt: string, tiles: Tile[]) {
+        console.log("💳 [MOCK] Checking Neural Credits (ENC)... 1000 available.");
+        console.log("💳 [MOCK] Deducting 3 ENC for Intent Compilation...");
+        
         console.log("🏠 Executing via Local Sovereign Core...");
         return await compilarComPrompt(prompt, tiles, new RobloxAdapter());
     }
