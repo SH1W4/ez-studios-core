@@ -68,6 +68,11 @@
   }
 }
 
+.hero-mask {
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+}
+
 .dark {
   /* Inherited from root for consistent Neural Neon look */
 }

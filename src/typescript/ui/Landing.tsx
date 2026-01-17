@@ -112,24 +112,26 @@ export default function Landing() {
             transition={{ duration: 0.8 }}
           >
             <motion.h1
-              className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
+              className="text-5xl md:text-7xl font-bold mb-6 leading-tight uppercase tracking-tighter"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              Transforme Crianças em{" "}
+              Arquitetando o Futuro:{" "}
               <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                Desenvolvedoras de Elite
+                Da Intenção à Realidade
               </span>
             </motion.h1>
 
             <motion.p
-              className="text-lg text-text-secondary mb-8 leading-relaxed"
+              className="text-lg text-text-secondary mb-8 leading-relaxed max-w-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              Motor procedural proprietário (WFC + BSP) + Compilador de Intenção + Pedagogia Científica. Gamificação impecável. Monetização integrada.
+              Soberania intelectual via Motor Procedural Soberano (WFC + BSP). 
+              Transforme lógica pura em arquitetura física instantaneamente. 
+              Pedagogia científica para a nova elite dev.
             </motion.p>
 
             <motion.div
@@ -172,23 +174,30 @@ export default function Landing() {
             </motion.div>
           </motion.div>
 
-          {/* Visual 3D (placeholder com glassmorphic card) */}
+          {/* Visual 3D (Neural Architect Concept) */}
           <motion.div
-            className="relative h-96 md:h-full min-h-96"
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            className="relative h-96 md:h-full min-h-[500px] flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20 rounded-3xl backdrop-blur-xl border border-primary/30 p-8 flex items-center justify-center"
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
+            <div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full" />
+            <img 
+              src="/src/assets/hero-architect.png" 
+              alt="Neural Architect"
+              className="relative z-10 w-full h-full object-contain rounded-3xl shadow-2xl border border-primary/20 hero-mask"
+            />
+            {/* Overlay de dados flutuantes */}
+            <motion.div 
+              className="absolute -top-10 -right-10 p-6 glass rounded-2xl hidden lg:block"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 3, repeat: Infinity }}
             >
-              <div className="text-center">
-                <Zap className="w-24 h-24 text-primary mx-auto mb-4 animate-pulse" />
-                <p className="text-xl font-bold text-primary">Motor Procedural</p>
-                <p className="text-sm text-text-secondary mt-2">WFC + BSP + Compilador</p>
-              </div>
+              <code className="text-[10px] text-primary">
+                PROMPT:// generate.sovereign.city<br/>
+                ENGINE:// core.v2.6.0<br/>
+                STATUS:// architecture_crystallized
+              </code>
             </motion.div>
           </motion.div>
         </div>
