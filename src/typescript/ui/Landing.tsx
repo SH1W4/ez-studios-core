@@ -1,7 +1,22 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Zap, Code2, Gamepad2, TrendingUp, Users, Star } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  ArrowRight, 
+  Zap, 
+  Code2, 
+  Gamepad2, 
+  TrendingUp, 
+  Users, 
+  Star,
+  Sparkles,
+  ChevronRight,
+  X,
+  Trophy,
+  Lock,
+  CheckCircle2
+} from "lucide-react";
 import { Button } from "../components/ui/button";
 import { useLocation } from "wouter";
+import { useState } from "react";
 
 /**
  * DESIGN PHILOSOPHY: Cyberpunk Educacional + Glassmorphism
@@ -14,6 +29,50 @@ import { useLocation } from "wouter";
 
 export default function Landing() {
   const [, navigate] = useLocation();
+  const [selectedTrack, setSelectedTrack] = useState<number | null>(null);
+
+  const QUESTS = [
+    {
+      title: "Academia de Magia (Luau)",
+      levels: [
+        { name: "Pergaminho Inicial", goal: "Variáveis e Tipos", icon: "scroll" },
+        { name: "Cânticos de Repetição", goal: "Loops e Iterações", icon: "repeat" },
+        { name: "Poções de Condição", goal: "Lógica Booleana", icon: "flask" },
+        { name: "Rituais de Evento", goal: "Signals e Callbacks", icon: "zap" },
+        { name: "Mestre dos Feitiços", goal: "Metatables e Otimização", icon: "crown" },
+      ]
+    },
+    {
+      title: "Poder de Criar Mundos",
+      levels: [
+        { name: "Primeira Peça Lego", goal: "Introdução ao WFC", icon: "box" },
+        { name: "Mapa das Possibilidades", goal: "Regras de Adjacência", icon: "map" },
+        { name: "Caixa de Presente Infinita", goal: "Introdução ao BSP", icon: "gift" },
+        { name: "Arquiteto de Labirintos", goal: "Salas e Corredores", icon: "layout" },
+        { name: "Deus Ex Machina", goal: "Cidades e Streaming", icon: "city" },
+      ]
+    },
+    {
+      title: "Cofre do Guardião",
+      levels: [
+        { name: "Mochila do Aventureiro", goal: "DataStore e Inventário", icon: "backpack" },
+        { name: "Selo de Segurança", goal: "Validação Server-Side", icon: "shield" },
+        { name: "Cadeado do Mestre", goal: "Criptografia", icon: "lock" },
+        { name: "Caça ao Tesouro Maligno", goal: "Auditoria de Backdoors", icon: "search" },
+        { name: "Guardião Supremo", goal: "Nuvem Distribuída", icon: "cloud" },
+      ]
+    },
+    {
+      title: "Magnata dos Games",
+      levels: [
+        { name: "Moeda de Troca", goal: "EZ Neural Credits (ENC)", icon: "coins" },
+        { name: "Vitrine de Ouro", goal: "Marketplace UGC", icon: "shopping-bag" },
+        { name: "Contrato de Aluguel", goal: "Assinaturas e Passes", icon: "file-text" },
+        { name: "Império de Ativos", goal: "Economia Global", icon: "trending-up" },
+        { name: "Soberano Virtual", goal: "DevEx e Gestão", icon: "landmark" },
+      ]
+    }
+  ];
 
   // Partículas animadas (representam tiles WFC)
   const particles = Array.from({ length: 20 }, (_, i) => ({
@@ -195,7 +254,7 @@ export default function Landing() {
             >
               <code className="text-[10px] text-primary">
                 PROMPT:// generate.sovereign.city<br/>
-                ENGINE:// core.v2.6.0<br/>
+                ENGINE:// core.v2.7.0<br/>
                 STATUS:// architecture_crystallized
               </code>
             </motion.div>
@@ -293,14 +352,14 @@ export default function Landing() {
               image: "/assets/track-worlds.png"
             },
             {
-              title: "Dados",
+              title: "Cofre do Guardião",
               levels: 5,
               color: "from-accent to-tertiary",
               desc: "Serialização → DataStore → Compressão → Distribuído → Mega",
               image: "/assets/track-data.png"
             },
             {
-              title: "Business",
+              title: "Magnata dos Games",
               levels: 5,
               color: "from-tertiary to-primary",
               desc: "UGC básico → 3 itens → Produção em massa → Marketing → CEO",
@@ -314,7 +373,8 @@ export default function Landing() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
+              onClick={() => setSelectedTrack(i)}
             >
               {/* Background Image with Gradient Overlay */}
               <div className="absolute inset-0 z-0">
@@ -458,6 +518,113 @@ export default function Landing() {
           <p>© 2026 EZ Studios. Transformando crianças em desenvolvedoras de elite.</p>
         </div>
       </footer>
+
+      {/* Quest Preview Modal */}
+      <AnimatePresence>
+        {selectedTrack !== null && (
+          <motion.div 
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-void-blue/90 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div 
+              className="w-full max-w-2xl glass rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+            >
+              {/* Modal Header */}
+              <div className="relative h-32 flex items-center px-8 overflow-hidden">
+                <div className={`absolute inset-0 bg-gradient-to-r opacity-20 ${
+                  selectedTrack === 0 ? "from-primary to-secondary" :
+                  selectedTrack === 1 ? "from-secondary to-accent" :
+                  selectedTrack === 2 ? "from-accent to-tertiary" :
+                  "from-tertiary to-primary"
+                }`} />
+                <div className="relative z-10">
+                  <span className="text-[10px] font-bold text-core-green uppercase tracking-[0.3em] mb-2 block">Visualização de Jornada</span>
+                  <h3 className="text-2xl font-bold">{QUESTS[selectedTrack].title}</h3>
+                </div>
+                <button 
+                  onClick={() => setSelectedTrack(null)}
+                  className="absolute top-6 right-6 p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-white/50 hover:text-white"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Modal Content - The Quest Tree */}
+              <div className="p-8 space-y-6">
+                <div className="relative">
+                  {/* Vertical Line Connector */}
+                  <div className="absolute left-[19px] top-4 bottom-4 w-px bg-white/10" />
+                  
+                  <div className="space-y-8">
+                    {QUESTS[selectedTrack].levels.map((level, idx) => (
+                      <motion.div 
+                        key={idx}
+                        className="relative flex items-center gap-6 group"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                      >
+                        {/* Node */}
+                        <div className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300
+                          ${idx === 0 
+                            ? "bg-core-green border-core-green text-void-blue shadow-[0_0_15px_rgba(0,255,157,0.5)]" 
+                            : "bg-void-blue border-white/10 text-white/30"
+                          }`}
+                        >
+                          {idx === 0 ? <Sparkles size={16} /> : <Lock size={14} />}
+                        </div>
+
+                        {/* Text */}
+                        <div className="flex-1">
+                          <div className={`text-[10px] font-bold uppercase tracking-widest mb-0.5
+                            ${idx === 0 ? "text-core-green" : "text-white/20"}`}
+                          >
+                            Nível {idx + 1}
+                          </div>
+                          <div className={`text-sm font-bold ${idx === 0 ? "text-white" : "text-white/40"}`}>
+                            {level.name}
+                          </div>
+                          <div className="text-xs text-muted-foreground/60 italic">
+                            {level.goal}
+                          </div>
+                        </div>
+
+                        {/* Reward tag for the last level */}
+                        {idx === 4 && (
+                          <div className="flex items-center gap-2 px-3 py-1 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-[9px] font-bold text-yellow-500 uppercase tracking-widest">
+                            <Trophy size={10} /> Recompensa Mestre
+                          </div>
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-white/5 flex gap-4">
+                  <Button 
+                    className="flex-1 h-12 bg-core-green text-void-blue font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(0,255,157,0.4)]"
+                    onClick={() => navigate("/dashboard")}
+                  >
+                    Começar Jornada
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="h-12 border-white/10 text-white/50 hover:text-white"
+                    onClick={() => setSelectedTrack(null)}
+                  >
+                    Voltar
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
